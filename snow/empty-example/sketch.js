@@ -1,3 +1,6 @@
+const X_AXIS = 2;
+const Y_AXIS = 1;
+
 var flakes01 = [];
 var flakes02 = [];
 
@@ -155,7 +158,12 @@ function setup() {
 
 function draw() {
   // background(0., 0.65, 0.8);
-  background(0.3);
+  // background(0.3);
+    b1 = color(255);
+    b2 = color(0);
+setGradient(0, 0, width / 2, height, b1, b2, X_AXIS);
+
+
   fill(1.);
   for (var i = 0; i < flakes01.length; i++)
   {
@@ -164,7 +172,7 @@ function draw() {
   }
 
 
-  // stroke(0.2, 0.1, 0.1, 1.);
+  stroke(0.2, 0.1, 0.1, 1.);
   fill(.35, 0.2, 0.1, 1.);
 
   push()
@@ -181,6 +189,7 @@ function draw() {
   pop()
 
   fill(1)
+  noStroke();
   for (var i = 0; i < flakes02.length; i++)
   {
 
@@ -252,7 +261,27 @@ function Flake02()
     {
         circle(this.x, this.y, this.size);
     }
+}
 
+function setGradient(x, y, w, h, c1, c2, axis)
+ {
+  noFill();
 
-
+  if (axis === Y_AXIS) {
+    // Top to bottom gradient
+    for (let i = y; i <= y + h; i++) {
+      let inter = map(i, y, y + h, 0, 1);
+      let c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(x, i, x + w, i);
+    }
+  } else if (axis === X_AXIS) {
+    // Left to right gradient
+    for (let i = x; i <= x + w; i++) {
+      let inter = map(i, x, x + w, 0, 1);
+      let c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(i, y, i, y + h);
+    }
+  }
 }
