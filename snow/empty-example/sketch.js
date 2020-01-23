@@ -158,10 +158,10 @@ function setup() {
 
 function draw() {
   // background(0., 0.65, 0.8);
-  // background(0.3);
-    b1 = color(255);
-    b2 = color(0);
-setGradient(0, 0, width / 2, height, b1, b2, X_AXIS);
+  background(0);
+  white = color(1);
+  black = color(0);
+  setGradient(0, 200, width, height, black, white, Y_AXIS);
 
 
   fill(1.);
@@ -206,7 +206,7 @@ function Flake01()
     this.yspeed  = 1.;
     this.xspeed  = -.25;
 
-    this.size = random(3,6);
+    this.size = random(2,5);
 
     this.fall = function()
     {
