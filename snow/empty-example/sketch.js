@@ -154,17 +154,28 @@ function setup() {
   {
     flakes02[i] = new Flake02();
   }
+
+
 }
 
 function draw() {
-  // background(0., 0.65, 0.8);
+
+  let amount;  
+
+
   background(0);
   white = color(1);
   black = color(0);
+  blue = color(0, 0, 0.8)
+
+  colorTrans = lerpColor(black, blue, amount);
+
+  
+
   setGradient(0, 200, width, height, black, white, Y_AXIS);
 
-
-  fill(1.);
+  noStroke();
+  
   for (var i = 0; i < flakes01.length; i++)
   {
     flakes01[i].fall();
@@ -208,6 +219,8 @@ function Flake01()
 
     this.size = random(2,5);
 
+    this.colorAlpha = random(1.);
+
     this.fall = function()
     {
         this.y += this.yspeed;
@@ -227,8 +240,12 @@ function Flake01()
 
     this.show = function()
     {
+        fill(1., 1., 1., this.colorAlpha);
         circle(this.x, this.y, this.size);
     }
+
+
+
 
 }
 
@@ -241,24 +258,33 @@ function Flake02()
 
     this.size = random(4, 7);
 
+    this.colorAlpha = random(0.3, 1.);  //Fluffy Alpha
+
+    this.gravity = 0.001;
+
     this.fall = function()
     {
         this.y += this.yspeed;
         this.x += this.xspeed;
 
+        this.yspeed += this.gravity;
+
         if(this.x < 0)
         {
-            this.x = random(width + 400)
+            this.x = random(width + 400);
         }
 
         if(this.y > height)
         {
-            this.y = random(-height-200, -50)
+            this.y = random(-height-200, -50);
+            this.yspeed = 1.5;
+            //this.yspeed = 0; fluffy flow feel. very fall straight down
         }
     }
 
     this.show = function()
-    {
+    {   
+        fill(1., 1., 1., this.colorAlpha);
         circle(this.x, this.y, this.size);
     }
 }
