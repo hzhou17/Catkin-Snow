@@ -16,6 +16,14 @@ var len = 2;
 var wid = 12;
 var wid = 12;
 
+let black, white, blueColor;
+
+var timer;
+
+var springTime = 400;
+
+var alphaAdjust;
+
 function bunch01()
 {
   // size = random(7)
@@ -42,7 +50,8 @@ function branch_upper()
     branch(6, branch_up1_len/4);
 
   //set a small branch for catkin
-    push();
+  if (timer > 100)
+  {  push();
 
       rotate(PI/1.8);
       branch(5, branch_small_len/3);
@@ -55,7 +64,7 @@ function branch_upper()
       // bump(3, 3, 3);
 
     pop();
-
+  }  
     rotate(PI/12);
     branch(5, branch_up2_len);
 
@@ -140,11 +149,16 @@ function catkin(thick, len)
   translate(0, -len);
 }
 
+// #################################################################
+function setup() 
+{
+  frameRate(24);  
 
-function setup() {
   createCanvas(1280, 720);
 
   colorMode(RGB, 1);
+
+
   for (var i = 0; i < 350; i++)
   {
     flakes01[i] = new Flake01();
@@ -155,26 +169,41 @@ function setup() {
     flakes02[i] = new Flake02();
   }
 
+  white = color(1);
+  black = color(0);
+  blueColor = color(0.5, 0.7, 0.9);
+  range = 0;
+  timer = 0; 
+
+  alphaAdjust = 0;
 
 }
 
-function draw() {
+function draw() 
+{
 
-  let amount;  
+  timer += 1;  
+
+  colorTrans = lerpColor(black, blueColor, range);  
+
+  background(colorTrans);
 
 
-  background(0);
-  white = color(1);
-  black = color(0);
-  blue = color(0, 0, 0.8)
 
-  colorTrans = lerpColor(black, blue, amount);
+  setGradient(0, 200, width, height, colorTrans, white, Y_AXIS);
 
-  
+ 
+  if (timer > 200)
+  {
+    range += 0.01;
+    alphaAdjust -= 0.008;
+  }
 
-  setGradient(0, 200, width, height, black, white, Y_AXIS);
+
 
   noStroke();
+  // fill(1, 1, 1, alphaAdjust);
+
   
   for (var i = 0; i < flakes01.length; i++)
   {
@@ -199,7 +228,7 @@ function draw() {
 
   pop()
 
-  fill(1)
+  fill(1, 1, 1, 1 + alphaAdjust);
   noStroke();
   for (var i = 0; i < flakes02.length; i++)
   {
@@ -212,24 +241,29 @@ function draw() {
 
 function Flake01()
 {
-    this.x = random(width + 400);
-    this.y = random(-height-200, -50);
-    this.yspeed  = 1.;
-    this.xspeed  = -.25;
+    this.x = random(0, width + 400);
+    this.y = random(-height, -50);
+    this.yspeed  = 1.5;
+    this.xspeed  = -.5;
 
     this.size = random(2,5);
 
-    this.colorAlpha = random(1.);
+    this.colorAlpha = random(1);
 
     this.fall = function()
     {
         this.y += this.yspeed;
         this.x += this.xspeed;
 
-        if(this.y > height)
+        if((this.y > height) && (timer < 200))
         {
-            this.y = random(-height-200, -50)
+            this.y = random(-height, -50)
         }
+
+        // if((this.y > height) && (timer > 200))
+        // {
+        //     this.y += this.yspeed;
+        // }
 
         if(this.x < 0)
         {
@@ -240,11 +274,9 @@ function Flake01()
 
     this.show = function()
     {
-        fill(1., 1., 1., this.colorAlpha);
+        fill(1., 1., 1., this.colorAlpha + alphaAdjust);
         circle(this.x, this.y, this.size);
     }
-
-
 
 
 }
@@ -253,14 +285,14 @@ function Flake02()
 {
     this.x = random(width + 400)
     this.y = random(-height-200, -50);
-    this.yspeed  = 1.5;
-    this.xspeed  = -.75;
+    this.yspeed  = 2.75;
+    this.xspeed  = -1.25;
 
     this.size = random(4, 7);
 
-    this.colorAlpha = random(0.3, 1.);  //Fluffy Alpha
+    this.colorAlpha = random(0.3, 1);  //Fluffy alphaAdjust
 
-    this.gravity = 0.001;
+    this.gravity = 0.002;
 
     this.fall = function()
     {
@@ -284,7 +316,7 @@ function Flake02()
 
     this.show = function()
     {   
-        fill(1., 1., 1., this.colorAlpha);
+        fill(1., 1., 1., this.colorAlpha + alphaAdjust);
         circle(this.x, this.y, this.size);
     }
 }
