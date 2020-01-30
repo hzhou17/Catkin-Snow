@@ -193,7 +193,7 @@ function draw()
   setGradient(0, 200, width, height, colorTrans, white, Y_AXIS);
 
  
-  if (timer > 200)
+  if (timer > 300)
   {
     range += 0.01;
     alphaAdjust -= 0.008;
