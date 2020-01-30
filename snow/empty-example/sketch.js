@@ -12,7 +12,7 @@ var branch_down2_len = 200;
 
 var branch_small_len = 100;
 
-var len = 2;
+var len = 3;
 var wid = 0;
 
 let black, white, blueColor;
@@ -35,7 +35,10 @@ function bunch01()
     {
          for(var j = 0; j < wid; j++)
          {
+
             push();
+            translate(12, 0);
+            rotate(PI)
             translate(8*i , 10*j);
             translate(10*noise(i, j), 10*noise(i, j))
             ellipse(0, 0, 5, 2);
@@ -63,18 +66,13 @@ function branch_upper()
       // ellipse(0, 0, 4, current_len_01)
       branch(4, current_len_01);
 
+      rotate(PI/8.5-PI/25);
 
-
-      rotate(PI/8.5);
-
-
-
-      rotate(-PI/25)
 
       fill(.25, 0.65, 0.33, 1.);
       translate(-8, 0);
 
-      ellipse(0, 0, 25, current_len_02)////catkin
+      bunch01();////catkin
 
     pop();
 
@@ -89,11 +87,12 @@ function branch_upper()
       rotate(PI/11);
 
       fill(.15, 0.8, 0.3, 1.);
-      translate(-8, 0);
-      // branch(20, branch_small_len + 30);////catkin
-      translate(0, -branch_small_len-30)
+      // translate(-8, 0);
+
       noStroke();
-      bunch01(10,20);
+
+
+      bunch01();  ////catkin
 
     pop();
 
@@ -178,7 +177,7 @@ function setup()
 
   white = color(1);
   black = color(0);
-  blueColor = color(0.5, 0.7, 0.9);
+  blueColor = color(0.3, 0.5, 0.7);
   range = 0;
   timer = 0;
 
@@ -193,7 +192,7 @@ function setup()
 
 function draw()
 {
-  print(wid);
+  // print(wid);
 
 
   timer += 1;
@@ -223,7 +222,7 @@ function draw()
     if (current_len_05 < 30) current_len_05 += 1;
     if (current_len_06 < 30) current_len_06 += 1;
 
-    wid += 1;
+    if (wid < 13) wid += 0.1;
  }
 
 
@@ -267,7 +266,6 @@ function draw()
   noStroke();
   for (var i = 0; i < flakes02.length; i++)
   {
-
     flakes02[i].fall();
     flakes02[i].show();
   }
@@ -297,11 +295,6 @@ function Flake01()
         {
             this.y = random(-height, -50)
         }
-
-        // if((this.y > height) && (timer > 200))
-        // {
-        //     this.y += this.yspeed;
-        // }
 
         if(this.x < 0)
         {
