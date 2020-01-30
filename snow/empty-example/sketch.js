@@ -13,8 +13,7 @@ var branch_down2_len = 200;
 var branch_small_len = 100;
 
 var len = 2;
-var wid = 12;
-var wid = 12;
+var wid = 0;
 
 let black, white, blueColor;
 
@@ -23,6 +22,11 @@ var timer;
 var springTime = 400;
 
 var alphaAdjust;
+
+var current_len_01, current_len_02, current_len_03,
+    current_len_04,current_len_05, current_len_06;
+
+
 
 function bunch01()
 {
@@ -43,28 +47,37 @@ function bunch01()
 function branch_upper()
 {
   push();
-    rotate(-PI/18);
+    rotate(PI/25);
     branch(6, branch_up1_len/2);
 
     rotate(-PI/20);
     branch(6, branch_up1_len/4);
 
   //set a small branch for catkin
-  if (timer > 100)
-  {  push();
+
+    push();
 
       rotate(PI/1.8);
-      branch(5, branch_small_len/3);
+
+  //growth
+      // ellipse(0, 0, 4, current_len_01)
+      branch(4, current_len_01);
+
+
+
       rotate(PI/8.5);
+
+
+
+      rotate(-PI/25)
 
       fill(.25, 0.65, 0.33, 1.);
       translate(-8, 0);
-      branch(20, branch_small_len + 30);////catkin
 
-      // bump(3, 3, 3);
+      ellipse(0, 0, 25, current_len_02)////catkin
 
     pop();
-  }  
+
     rotate(PI/12);
     branch(5, branch_up2_len);
 
@@ -77,9 +90,9 @@ function branch_upper()
 
       fill(.15, 0.8, 0.3, 1.);
       translate(-8, 0);
-      branch(20, branch_small_len + 30);////catkin
-
-      // Stroke(1.0);
+      // branch(20, branch_small_len + 30);////catkin
+      translate(0, -branch_small_len-30)
+      noStroke();
       bunch01(10,20);
 
     pop();
@@ -125,7 +138,7 @@ function branch_lower()
 {
   push();
 
-  rotate(PI/5);
+  rotate(PI/3.5);
   branch(6, branch_down1_len);
 
   rotate(-PI/15);
@@ -143,16 +156,10 @@ function branch(thick, len)
   translate(0, -len);
 }
 
-function catkin(thick, len)
-{
-  rect(0, 0, thick, -len);
-  translate(0, -len);
-}
-
 // #################################################################
-function setup() 
+function setup()
 {
-  frameRate(24);  
+  frameRate(24);
 
   createCanvas(1280, 720);
 
@@ -173,38 +180,64 @@ function setup()
   black = color(0);
   blueColor = color(0.5, 0.7, 0.9);
   range = 0;
-  timer = 0; 
+  timer = 0;
 
   alphaAdjust = 0;
-
+  current_len_01 = 0;
+  current_len_02 = 0;
+  current_len_03 = 0;
+  current_len_04 = 0;
+  current_len_05 = 0;
+  current_len_06 = 0;
 }
 
-function draw() 
+function draw()
 {
+  print(wid);
 
-  timer += 1;  
 
-  colorTrans = lerpColor(black, blueColor, range);  
+  timer += 1;
+
+  colorTrans = lerpColor(black, blueColor, range);
 
   background(colorTrans);
 
 
-
   setGradient(0, 200, width, height, colorTrans, white, Y_AXIS);
 
- 
-  if (timer > 300)
+
+  if (timer > 50)
   {
     range += 0.01;
     alphaAdjust -= 0.008;
   }
 
+ if (timer > 50)
+ {
+    if (current_len_01 < 25) current_len_01 += 1;
+    if (current_len_02 < 100) current_len_02 += 1;
+
+    if (current_len_03 < 30) current_len_03 += 1;
+    if (current_len_04 < 30) current_len_04 += 1;
+
+    if (current_len_05 < 30) current_len_05 += 1;
+    if (current_len_06 < 30) current_len_06 += 1;
+
+    wid += 1;
+ }
+
+
+
+
+
+
+
+
+
 
 
   noStroke();
-  // fill(1, 1, 1, alphaAdjust);
 
-  
   for (var i = 0; i < flakes01.length; i++)
   {
     flakes01[i].fall();
@@ -216,11 +249,13 @@ function draw()
   fill(.35, 0.2, 0.1, 1.);
 
   push()
-    translate(0, height/2.4);
-    rotate(PI/2.3);
+    translate(0, height/2.5);
 
+    rotate(PI/2.2);
+    branch(9, base_branch_len/1.75);
 
-    branch(9, base_branch_len);
+    rotate(-PI/12);
+    branch(7.5, base_branch_len/3);
 
     branch_upper();
 
@@ -236,6 +271,9 @@ function draw()
     flakes02[i].fall();
     flakes02[i].show();
   }
+
+
+
 }
 
 
@@ -315,7 +353,7 @@ function Flake02()
     }
 
     this.show = function()
-    {   
+    {
         fill(1., 1., 1., this.colorAlpha + alphaAdjust);
         circle(this.x, this.y, this.size);
     }
