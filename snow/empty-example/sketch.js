@@ -6,6 +6,8 @@ const Y_AXIS = 1;
 
 var flakes01 = [];
 var flakes02 = [];
+var flakes03 = [];
+var flakes04 = [];
 
 var base_branch_len = 300;
 var branch_up1_len = 300;
@@ -22,12 +24,19 @@ let black, white, blueColor;
 
 var timer;
 
-var springTime = 400;
+var springTime = 300;
 
 var alphaAdjust;
 
 var current_len_01, current_len_02, current_len_03,
     current_len_04,current_len_05, current_len_06;
+
+var len_01, len_02, len_03, len_04, len_tri1, len_tri2
+
+
+
+
+
 
 function setGradient(x, y, w, h, c1, c2, axis)
  {
@@ -64,8 +73,8 @@ function bunch01(x, y, len, wid, sizeX, sizeY)
             push();
             translate(x, y);
             rotate(PI)
-            translate(6*i , 9.5*j);
-            translate(8*noise(i, j), 9*noise(i, j))
+            translate(6*i , 8.5*j);
+            translate(8*noise(i, j), 8*noise(i, j))
             ellipse(0, 0, sizeX, sizeY);
             pop();
          }
@@ -160,6 +169,8 @@ function bunch03(x, y, len, wid, sizeX, sizeY)
 }
 
 // #################################################################
+// #################################################################
+// #################################################################
 function setup()
 {
   frameRate(24);
@@ -168,14 +179,19 @@ function setup()
 
   colorMode(RGB, 1);
 
-  for (var i = 0; i < 350; i++)
+  for (var i = 0; i < 400; i++)
   {
     flakes01[i] = new Flake01();
   }
 
-  for (var i = 0; i < 250; i++)
+  for (var i = 0; i < 300; i++)
   {
     flakes02[i] = new Flake02();
+  }
+
+  for (var i = 0; i < 250; i++)
+  {
+    flakes03[i] = new Flake03();
   }
 
   white = color(0.9);
@@ -191,6 +207,13 @@ function setup()
   current_len_04 = 0;
   current_len_05 = 0;
   current_len_06 = 0;
+  len_01 = 0;
+  len_01 = 0;
+  len_01 = 0;
+  len_01 = 0;
+
+  len_tri1   = 0;
+  len_tri2   = 0;
 }
 
 
@@ -209,19 +232,18 @@ function draw()
 
   // setGradient(0, 0, width / 2, height, white, blueColor, X_AXIS);
 
-  if (timer > 250)
+  if (timer > springTime)
   {
     range += 0.01;
     alphaAdjust -= 0.008;
   }
 
- if (timer > 50)
+ if (timer > springTime + 50)
  {
     if (current_len_01 < 25)  current_len_01 += 1;
     if (current_len_02 < 100) current_len_02 += 1;
 
-    if (current_len_03 < 30) current_len_03 += 1;
-    if (current_len_04 < 30) current_len_04 += 1;
+
 
     if (current_len_05 < 30) current_len_05 += 1;
     if (current_len_06 < 30) current_len_06 += 1;
@@ -229,7 +251,35 @@ function draw()
     // if (wid < 13) wid += 0.1;
  }
 
-  horizon()
+ if (timer > springTime + 80)
+
+{
+    if (current_len_03 < 150) current_len_03 += 1.2;
+    if (current_len_04 < 150) current_len_04 += 1;
+}
+
+
+ if (timer > springTime + 120)
+
+{
+    if (len_tri1 < 4) len_tri1 += random(0.1);
+    // if (current_len_04 < 150) current_len_04 += 1;
+}
+
+
+
+if (timer > springTime + 140)
+{
+  if (len_01 < 26) len_01 += random(0.3);
+}
+
+if (timer > springTime + 200)
+{
+  if (len_tri2 < 4) len_tri2 += random(0.1);
+}
+
+
+  // horizon()
 
 
 
@@ -283,6 +333,12 @@ function draw()
     flakes02[i].fall();
     flakes02[i].show();
   }
+
+  // for (var i = 0; i < flakes03.length; i++)
+  // {
+  //   flakes03[i].fall();
+  //   flakes03[i].show();
+  // }
 }
 
 
@@ -333,11 +389,12 @@ function Flake02()
     this.yspeed  = 2.75;
     this.xspeed  = -1.25;
 
-    this.size = random(4, 7);
+    this.length = random(4, 7);
+    this.width = random(3, 5);
 
     this.colorAlpha = random(0.3, 1);  //Fluffy alphaAdjust
 
-    this.gravity = 0.002;
+    this.gravity = 0.003;
 
     this.fall = function()
     {
@@ -362,24 +419,53 @@ function Flake02()
     this.show = function()
     {
         fill(1., 1., 1., this.colorAlpha + alphaAdjust);
-        circle(this.x, this.y, this.size);
+        ellipse(this.x, this.y, this.length, this.width);
     }
 }
 
-function edge()
+function Flake03()
 {
+    this.x = random(width + 400)
+    this.y = random(-height-200, -50);
+    this.yspeed  = 2.75;
+    this.xspeed  = -1.25;
+
+    this.length = random(4, 7);
+    this.width = random(3, 5);
+
+    this.colorAlpha = random(0.3, 1);  //Fluffy alphaAdjust
+
+    this.gravity = 0.003;
+
+    this.rotation = PI/3 + random(-10, 10)
+
+    this.fall = function()
+    {
+        this.y += this.yspeed;
+        this.x += this.xspeed;
+
+        this.yspeed += this.gravity;
+
+        if(this.x < 0)
+        {
+            this.x = random(width + 400);
+        }
+
+        if(this.y > height)
+        {
+            this.y = random(-height-200, -50);
+            this.yspeed = 1.5;
+            //this.yspeed = 0; fluffy flow feel. very fall straight down
+        }
+    }
+
     this.show = function()
     {
-        
+        fill(1., 1., 1., this.colorAlpha + alphaAdjust);
+        rotate(this.rotation)
+        ellipse(this.x, this.y, this.length, this.width);
     }
 }
-
-
-
-
-
-
-
 
 function horizon()
 {
@@ -439,13 +525,13 @@ function branch_upper()
 
 
 
-            catkin(); //////////////
+            catkin1(); //////////////
             ////////////////////////////
 
-            fill(0, 0, 0, 1)
-            strokeWeight(0.75)
+            // fill(1, 1, 1, 0.7)
+            // noStroke();
 
-            bunch02(18, -16, 1, 35, 7, 0.75);
+            // bunch02(18, -16, 1, 32, 7, 1.5); ///fur
 
 
 
@@ -463,17 +549,17 @@ function branch_upper()
 
 
 
-        catkin(); //////////////
+        catkin1(); //////////////
         ////////////////////////////
 
-        fill(1, 1, 1, 0.8)
-        strokeWeight(0.75)
-        noStroke()
+        // fill(1, 1, 1, 0.8)
+        // strokeWeight(0.75)
+        // noStroke()
 
-        bunch02(18, -16, 1, 35, 7, 1);
+        // bunch02(18, -16, 1, 32, 7, 1.5);///fur
 
 
-        bunch03(0, -16, 1, 35, 7, 1);
+        // bunch03(0, -16, 1, 32, 7, 1.5);///fur
 
     pop();
 
@@ -487,11 +573,15 @@ function branch_upper()
 
         fill(.43, 0.4, 0.31, 1.); ///////light color
         rotate(PI/3);
-        branch(5, branch_small_len/3);
+        branch(5, current_len_02/2.5);
 
-        rotate(PI/11);
+        rotate(PI/5.25);
 
-        catkin(); //////////////
+        catkin2(); //////////////
+        ////////////////////////////
+
+        translate(15, 15)
+        catkin2(); //////////////
         ////////////////////////////
 
     pop();
@@ -503,7 +593,7 @@ function branch_upper()
 
     rotate(PI/5);
     fill(.43, 0.4, 0.31, 1.);
-    branch(6, branch_up2_len * 0.4);
+    branch(6, current_len_03 * 0.4);
 
     push();
 
@@ -511,7 +601,11 @@ function branch_upper()
         fill(.15, 0.8, 0.3, 1.);
         rotate(PI/3);
         translate(-8, 0);
-        branch(20, branch_small_len + 30);////catkin
+        catkin1()
+
+        translate(30, 15)
+        catkin2()
+
 
     pop();
 
@@ -555,11 +649,10 @@ function outline(x1, y1, x2, y2)
 {
   line(x1, y1, x2, y2);
   line(x1, y1, -x2, y2);
-
-
 }
 
-function catkin()
+
+function catkin1()
 {   
     push()    
         fill(.15, 0.45, 0.25, 1.0);
@@ -567,28 +660,136 @@ function catkin()
         translate(-8, 0);
 
         push()
-          tri(25, -15, 5, 25, 7, 4);
+          tri(25, -15, len_tri1, 25, 7, 4);
         pop()
 
         push()
           rotate(PI)
-          tri2(0, 257, 4, 25, 7, 4);
+          tri2(0, 237, len_tri2, 25, 7, 4);
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, 26, 7, 4);////catkin
+        bunch01(22, -16, 3, len_01, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, 26, 6, 4);////catkin
+        bunch01(22, -13, 3, len_01, 6, 4);////catkin
 
-        fill(.15, 0.8, 0.3, 1.);
+        fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 4, 26, 5, 3);//light
+        bunch01(25, -12, 4, len_01, 5, 3);//light
     pop()
 }
 
+function catkin2()
+{   
+    push()    
+        fill(.2, 0.45, 0.3, 1.0);
+        stroke(1,1,1,.2);
+        translate(-8, 0);
 
+        push()
+          tri(25, -15, len_tri1, 25, 7, 4);
+        pop()
 
+        push()
+          rotate(PI)
+          tri2(0, 237, len_tri2, 25, 5, 4);
+        pop()
 
+        noStroke();
+        bunch01(22, -16, 3, len_01, 7, 4);////catkin
 
+        fill(.2, 0.55, 0.3, 1.0);
+        noStroke();
+        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+
+        fill(.15, 0.7, 0.3, 1.);
+        noStroke();
+        bunch01(25, -12, 3, len_01, 5, 3);//light
+    pop()
+}
+function catkin3()
+{   
+    push()    
+        fill(.2, 0.45, 0.3, 1.0);
+        stroke(1,1,1,.2);
+        translate(-8, 0);
+
+        push()
+          tri(25, -15, len_tri1, 25, 7, 4);
+        pop()
+
+        push()
+          rotate(PI)
+          tri2(0, 237, len_tri2, 25, 5, 4);
+        pop()
+
+        noStroke();
+        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+
+        fill(.2, 0.55, 0.3, 1.0);
+        noStroke();
+        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+
+        fill(.15, 0.7, 0.3, 1.);
+        noStroke();
+        bunch01(25, -12, 3, len_01, 5, 3);//light
+    pop()
+}
+function catkin4()
+{   
+    push()    
+        fill(.2, 0.45, 0.3, 1.0);
+        stroke(1,1,1,.2);
+        translate(-8, 0);
+
+        push()
+          tri(25, -15, len_tri1, 25, 7, 4);
+        pop()
+
+        push()
+          rotate(PI)
+          tri2(0, 237, len_tri2, 25, 5, 4);
+        pop()
+
+        noStroke();
+        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+
+        fill(.2, 0.55, 0.3, 1.0);
+        noStroke();
+        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+
+        fill(.15, 0.7, 0.3, 1.);
+        noStroke();
+        bunch01(25, -12, 3, len_01, 5, 3);//light
+    pop()
+}
+function catkin5()
+{   
+    push()    
+        fill(.2, 0.45, 0.3, 1.0);
+        stroke(1,1,1,.2);
+        translate(-8, 0);
+
+        push()
+          tri(25, -15, len_tri1, 25, 7, 4);
+        pop()
+
+        push()
+          rotate(PI)
+          tri2(0, 237, len_tri2, 25, 5, 4);
+        pop()
+
+        noStroke();
+        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+
+        fill(.2, 0.55, 0.3, 1.0);
+        noStroke();
+        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+
+        fill(.15, 0.7, 0.3, 1.);
+        noStroke();
+        bunch01(25, -12, 3, len_01, 5, 3);//light
+    pop()
+}
