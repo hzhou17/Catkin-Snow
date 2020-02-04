@@ -18,8 +18,6 @@ var branch_down2_len = 200;
 
 var branch_small_len = 100;
 
-// var len = 3;
-// var wid = 0;
 
 let black, white, blueColor;
 
@@ -29,28 +27,22 @@ var springTime = 300;
 
 var alphaAdjust;
 
-var current_len_01, current_len_02, current_len_03,
+var current_len_01, current_len_02, current_len_03, 
     current_len_04,current_len_05, current_len_06;
 
 var len_01, len_02, len_03, len_04, len_05, len_tri1, len_tri2, len_tri3, len_tri4;
 
-var rotateRight1;
-var rotateRight2;
-var rotateRight3;
-var rotateRight4;
+
+var rotateRight1, rotateRight2, rotateRight3, rotateRight4;
 
 
-var rotateDegree1;
-var rotateDegree2;
-var rotateDegree3;
-var rotateDegree4;
+var rotateDegree1, rotateDegree2, rotateDegree3, rotateDegree4;
 
 
 var furAlpha;
 
 
-
-function setGradient(x, y, w, h, c1, c2, axis)
+function setGradient(x, y, w, h, c1, c2, axis) //from Processing Example
  {
   noFill();
 
@@ -74,20 +66,20 @@ function setGradient(x, y, w, h, c1, c2, axis)
 }
 
 
-
-function bunch01(x, y, len, wid, sizeX, sizeY)
+function rect_Dots(tx, ty, len, wid, sizeX, sizeY, noiseX, noiseY)
 {
       for(var i = 0; i < len; i++)
     {
          for(var j = 0; j < wid; j++)
          {
-
             push();
-            translate(x, y);
-            rotate(PI)
-            translate(6*i , 8.5*j);
-            translate(8*noise(i, j), 12*noise(i, j))
-            ellipse(0, 0, sizeX, sizeY);
+
+                translate(tx, ty);
+                rotate(PI)
+                translate(6*i , 8.5*j);
+                translate(noiseX*noise(i, j), noiseY*noise(i, j))
+
+                    ellipse(0, 0, sizeX, sizeY);
             pop();
          }
 
@@ -131,54 +123,30 @@ function tri2(x, y, len, wid, sizeX, sizeY)
     }
 }
 
-
-function bunch02(x, y, len, wid, sizeX, sizeY)
+function white_Fur(x, y, length, sizeX, sizeY, PI_denominator)
 {
-      for(var i = 0; i < len; i++)
+      for(var i = 0; i < 1; i++)
     {
-         for(var j = 0; j < wid; j++)
+         for(var j = 0; j < length; j++)
          {
-
             push();
             
-            translate(x, y);
-            rotate(PI) 
+                translate(x, y);
+                rotate(PI) 
 
-            translate(6*i , 7*j);
-            translate(10*noise(i, j), 10*noise(i, j))
+                translate(6*i , 7*j);
 
-            rotate(-PI/2.75 + noise(i, j) )
+                translate(10*noise(i, j), 10*noise(i, j))
 
-            ellipse(0, 0, sizeX, sizeY);
+                rotate(PI/PI_denominator + noise(i, j) )
+
+                    ellipse(0, 0, sizeX, sizeY);
+
             pop();
          }
-
     }
 }
 
-function bunch03(x, y, len, wid, sizeX, sizeY)
-{
-      for(var i = 0; i < len; i++)
-    {
-         for(var j = 0; j < wid; j++)
-         {
-
-            push();
-            
-            translate(x, y);
-            rotate(PI) 
-
-            translate(6*i , 7*j);
-            translate(10*noise(i, j), 10*noise(i, j))
-
-            rotate(PI/4 + noise(i, j) )
-
-            ellipse(0, 0, sizeX, sizeY);
-            pop();
-         }
-
-    }
-}
 
 // #################################################################
 // #################################################################
@@ -219,6 +187,7 @@ function setup()
   current_len_04 = 0;
   current_len_05 = 0;
   current_len_06 = 0;
+
   len_01 = 0;
   len_02 = 0;
   len_03 = 0;
@@ -315,13 +284,10 @@ if (timer > springTime + 140)
     if (len_01 < 26) len_01 += noise(i)/700;
   }
 
-
   for (var i = 0; i < 250; i++)
   {
     if (len_02 < 26) len_02 += noise(i)/800;
   }
-
-  
 
 }
 
@@ -334,9 +300,6 @@ if (timer > springTime + 150)
 
 
   if (len_tri3 < 4) len_tri3 += random(0.1)*3;
-
-
-
 }
 
 
@@ -345,11 +308,6 @@ if (timer > springTime + 150)
   if (len_04 < 26) len_04 += random(0.1, 0.4);
   if (len_05 < 26) len_05 += random(0.05, 0.35);
 }
-
-
-
-
-
 
 
 if (timer > springTime + 220)
@@ -461,12 +419,6 @@ if (timer > springTime + 280)
   if (alphaAdjust <= 0) alphaAdjust+= 0.005;
 }
 
-
-
-
-
-
-  // horizon()
 
 
 
@@ -752,10 +704,10 @@ function branch_upper()
                           strokeWeight( 1)
                           // noStroke()
 
-                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(18, -16, 32, 7, 1.5, -2.75);///fur left
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur right
 
 
 
@@ -781,10 +733,10 @@ function branch_upper()
                           strokeWeight( 1)
                           // noStroke()
 
-                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(18, -16, 32, 7, 1.5, -2.75);///fur
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur
 
     pop();
 
@@ -813,7 +765,7 @@ function branch_upper()
                           // bunch02(18, -16, 2, 32, 7, 1.5);///fur
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur
 
 
 
@@ -830,10 +782,10 @@ function branch_upper()
                           strokeWeight( 1)
                           // noStroke()
 
-                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(18, -16, 32, 7, 1.5, -2.75);///fur
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur
 
 
     pop();
@@ -862,10 +814,10 @@ function branch_upper()
                           strokeWeight( 1)
                           // noStroke()
 
-                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(18, -16, 32, 7, 1.5, -2.75);///fur
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur
 
         translate(30, 15)
 
@@ -876,10 +828,10 @@ function branch_upper()
                           strokeWeight( 1)
                           // noStroke()
 
-                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(18, -16, 32, 7, 1.5, -2.75);///fur
 
 
-                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          white_Fur(0, -16, 32, 7, 1.5, 4);///fur
 
 
     pop();
@@ -947,17 +899,17 @@ function catkin1()
         noStroke();
         // stroke(1,1,1,.2)
         // strokeWeight(2);
-        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+        rect_Dots(22, -16, 3, len_01, 7, 4, 8, 12);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+        rect_Dots(22, -13, 3, len_01, 6, 4, 8, 12);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         // stroke(0,0,0,.4);
         // strokeWeight(1);
         noStroke();
-        bunch01(25, -12, 4, len_01, 5, 3);//light
+        rect_Dots(25, -12, 4, len_01, 5, 3, 8, 12);//light
     pop()
 }
 
@@ -978,15 +930,15 @@ function catkin2()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_02, 7, 4);////catkin
+        rect_Dots(22, -16, 3, len_02, 7, 4, 8, 12);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_02, 6, 4);////catkin
+        rect_Dots(22, -13, 3, len_02, 6, 4, 8, 12);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_02, 5, 3);//light
+        rect_Dots(25, -12, 3, len_02, 5, 3, 8, 12);//light
     pop()
 }
 function catkin3()
@@ -1006,15 +958,15 @@ function catkin3()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_03, 7, 4);////catkin
+        rect_Dots(22, -16, 3, len_03, 7, 4, 8, 12);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_03, 6, 4);////catkin
+        rect_Dots(22, -13, 3, len_03, 6, 4, 8, 12);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_03, 5, 3);//light
+        rect_Dots(25, -12, 3, len_03, 5, 3, 8, 12);//light
     pop()
 }
 function catkin4()
@@ -1034,15 +986,15 @@ function catkin4()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_04, 7, 4);////catkin
+        rect_Dots(22, -16, 3, len_04, 7, 4, 8, 12);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_04, 6, 4);////catkin
+        rect_Dots(22, -13, 3, len_04, 6, 4, 8, 12);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_04, 5, 3);//light
+        rect_Dots(25, -12, 3, len_04, 5, 3, 8, 12);//light
     pop()
 }
 function catkin5()
@@ -1062,14 +1014,14 @@ function catkin5()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_05, 7, 4);////catkin
+        rect_Dots(22, -16, 3, len_05, 7, 4, 8, 12);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_05, 6, 4);////catkin
+        rect_Dots(22, -13, 3, len_05, 6, 4, 8, 12);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_05, 5, 3);//light
+        rect_Dots(25, -12, 3, len_05, 5, 3, 8, 12);//light
     pop()
 }
