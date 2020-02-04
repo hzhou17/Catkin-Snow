@@ -1,5 +1,6 @@
 let img
 
+var bar;
 
 const X_AXIS = 2;
 const Y_AXIS = 1;
@@ -31,10 +32,21 @@ var alphaAdjust;
 var current_len_01, current_len_02, current_len_03,
     current_len_04,current_len_05, current_len_06;
 
-var len_01, len_02, len_03, len_04, len_tri1, len_tri2
+var len_01, len_02, len_03, len_04, len_05, len_tri1, len_tri2, len_tri3, len_tri4;
+
+var rotateRight1;
+var rotateRight2;
+var rotateRight3;
+var rotateRight4;
 
 
+var rotateDegree1;
+var rotateDegree2;
+var rotateDegree3;
+var rotateDegree4;
 
+
+var furAlpha;
 
 
 
@@ -74,7 +86,7 @@ function bunch01(x, y, len, wid, sizeX, sizeY)
             translate(x, y);
             rotate(PI)
             translate(6*i , 8.5*j);
-            translate(8*noise(i, j), 8*noise(i, j))
+            translate(8*noise(i, j), 12*noise(i, j))
             ellipse(0, 0, sizeX, sizeY);
             pop();
          }
@@ -189,12 +201,12 @@ function setup()
     flakes02[i] = new Flake02();
   }
 
-  for (var i = 0; i < 250; i++)
+  for (var i = 0; i < 150; i++)
   {
     flakes03[i] = new Flake03();
   }
 
-  white = color(0.9);
+  white = color(0.95);
   black = color(0);
   blueColor = color(0.3, 0.5, 0.8);
   range = 0;
@@ -208,18 +220,41 @@ function setup()
   current_len_05 = 0;
   current_len_06 = 0;
   len_01 = 0;
-  len_01 = 0;
-  len_01 = 0;
-  len_01 = 0;
+  len_02 = 0;
+  len_03 = 0;
+  len_04 = 0;
+  len_05 = 0;
 
   len_tri1   = 0;
   len_tri2   = 0;
+  len_tri3   = 0;
+  len_tri4   = 0;
+
+  rotateDegree1 = 0;
+  rotateDegree2 = 0;
+  rotateDegree3 = 0;
+  rotateDegree4 = 0;  
+  rotateDegree5 = 0;  
+
+
+  rotateRight1 = 1;
+  rotateRight2 = 1;
+  rotateRight3 = 1;
+  rotateRight4 = 1;
+  rotateRight5 = 1;
+
+
+  furAlpha = 0;
+
+  bar = 100;
 }
 
 
 function draw()
 {
-  // print(wid);
+  // print (height/2-50)
+  // print(PI/6)
+  
 
   timer += 1;
 
@@ -228,19 +263,23 @@ function draw()
   background(colorTrans);
 
 
-  setGradient(0, 50, width, height, colorTrans, white, Y_AXIS);
+  setGradient(0, 100, width, height, colorTrans, white, Y_AXIS);
 
   // setGradient(0, 0, width / 2, height, white, blueColor, X_AXIS);
 
-  if (timer > springTime)
+  if ((timer > springTime) && (timer < 450))
   {
     range += 0.01;
-    alphaAdjust -= 0.008;
+    if (alphaAdjust >= -1) alphaAdjust -= 0.008;
+
   }
 
  if (timer > springTime + 50)
  {
-    if (current_len_01 < 25)  current_len_01 += 1;
+    if (bar > 50) bar -=1;
+
+
+    if (current_len_01 < 25)  current_len_01 += 0.6;
     if (current_len_02 < 100) current_len_02 += 1;
 
 
@@ -255,14 +294,14 @@ function draw()
 
 {
     if (current_len_03 < 150) current_len_03 += 1.2;
-    if (current_len_04 < 150) current_len_04 += 1;
+    if (current_len_04 < 150) current_len_04 += 1.4;
 }
 
 
  if (timer > springTime + 120)
 
 {
-    if (len_tri1 < 4) len_tri1 += random(0.1);
+    if (len_tri1 < 4) len_tri1 += random(0.1)*3;
     // if (current_len_04 < 150) current_len_04 += 1;
 }
 
@@ -270,13 +309,161 @@ function draw()
 
 if (timer > springTime + 140)
 {
-  if (len_01 < 26) len_01 += random(0.3);
+
+  for (var i = 0; i < 100; i++)
+  {
+    if (len_01 < 26) len_01 += noise(i)/700;
+  }
+
+
+  for (var i = 0; i < 250; i++)
+  {
+    if (len_02 < 26) len_02 += noise(i)/800;
+  }
+
+  
+
 }
 
-if (timer > springTime + 200)
+if (timer > springTime + 150)
 {
-  if (len_tri2 < 4) len_tri2 += random(0.1);
+
+  if (len_01 < 26) len_01 += random(0.1, 0.3);
+  if (len_02 < 26) len_02 += random(0.3);
+  if (len_03 < 26) len_03 += random(0.3);
+
+
+  if (len_tri3 < 4) len_tri3 += random(0.1)*3;
+
+
+
 }
+
+
+if (timer > springTime + 150)
+{
+  if (len_04 < 26) len_04 += random(0.1, 0.4);
+  if (len_05 < 26) len_05 += random(0.05, 0.35);
+}
+
+
+
+
+
+
+
+if (timer > springTime + 220)
+{
+    if (len_tri2 < 4) len_tri2 += random(0.2);
+
+}
+
+
+if (timer > springTime + 250)
+{
+    if (len_tri4 < 4) len_tri4 += random(0.2);
+
+}
+
+
+if (timer > springTime + 260)
+{
+
+    if ((rotateDegree1 > 2.5 ) || (rotateDegree1 < -2.5))
+    {
+        // rotateDegree = 0;
+        rotateRight1 *= -1
+    }
+
+
+    for (var i = 50; i < 150; i++)
+    {
+          rotateDegree1 += rotateRight1 * noise(i)/1000;
+    }
+
+}
+
+if (timer > springTime + 270)
+{
+
+    if ((rotateDegree2 > 2.75 ) || (rotateDegree2 < -2.75))
+    {
+        // rotateDegree = 0;
+        rotateRight2 *= -1
+    }
+
+
+    for (var i = 100; i < 200; i++)
+    {
+          rotateDegree2 += rotateRight2 * noise(i)/1000;
+    }
+
+}
+
+if (timer > springTime + 270)
+{
+
+    if ((rotateDegree3 > 2.75 ) || (rotateDegree3 < -2.75))
+    {
+        // rotateDegree = 0;
+        rotateRight3 *= -1
+    }
+
+
+    for (var i = 10; i < 110; i++)
+    {
+          rotateDegree3 += rotateRight3 * noise(i)/1000;
+    }
+
+}
+
+if (timer > springTime + 270)
+{
+
+    if ((rotateDegree4 > 2.75 ) || (rotateDegree4 < -2.75))
+    {
+        // rotateDegree = 0;
+        rotateRight4 *= -1
+    }
+
+
+    for (var i = 0; i < 100; i++)
+    {
+          rotateDegree4 += rotateRight4 * noise(i)/1000;
+    }
+
+}
+
+if (timer > springTime + 300)
+{
+
+    if ((rotateDegree5 > 2.75 ) || (rotateDegree5 < -2.75))
+    {
+        // rotateDegree = 0;
+        rotateRight5 *= -1
+    }
+
+
+    for (var i = 0; i < 100; i++)
+    {
+          rotateDegree5 += rotateRight5 * noise(i)/1000;
+    }
+
+}
+
+
+
+
+
+if (timer > springTime + 280)
+{
+  if (furAlpha < 0.55) furAlpha+=0.01;
+  if (alphaAdjust <= 0) alphaAdjust+= 0.005;
+}
+
+
+
+
 
 
   // horizon()
@@ -285,12 +472,14 @@ if (timer > springTime + 200)
 
   noStroke();
 
-  for (var i = 0; i < flakes01.length; i++)
+  if (timer < 400)
   {
-    flakes01[i].fall();
-    flakes01[i].show();
+    for (var i = 0; i < flakes01.length; i++)
+    {
+      flakes01[i].fall();
+      flakes01[i].show();
+    }
   }
-
 
 
 
@@ -328,17 +517,27 @@ if (timer > springTime + 200)
 
   fill(1, 1, 1, 1 + alphaAdjust);
   noStroke();
-  for (var i = 0; i < flakes02.length; i++)
+
+    if (timer < 400)
   {
-    flakes02[i].fall();
-    flakes02[i].show();
+    for (var i = 0; i < flakes02.length; i++)
+    {
+      flakes02[i].fall();
+      flakes02[i].show();
+    }
   }
 
-  // for (var i = 0; i < flakes03.length; i++)
-  // {
-  //   flakes03[i].fall();
-  //   flakes03[i].show();
-  // }
+
+
+  if (timer > 600)
+  {
+    for (var i = 0; i < flakes03.length; i++)
+    {
+      flakes03[i].fall();
+      flakes03[i].show();
+    }
+  }
+  // rect(width/2, height/2+50, 50, 50)
 }
 
 
@@ -352,6 +551,7 @@ function Flake01()
     this.yspeed  = 1.5;
     this.xspeed  = -.5;
 
+
     this.size = random(2,5);
 
     this.colorAlpha = random(1);
@@ -361,10 +561,19 @@ function Flake01()
         this.y += this.yspeed;
         this.x += this.xspeed;
 
-        if((this.y > height) && (timer < 200))
+
+        if((this.y > height) && (timer < 300))
         {
             this.y = random(-height, -50)
         }
+
+        if((this.y > height) && (timer > 300))
+        {
+            this.y = random(height-300, height/2-300)
+        }
+
+
+
 
         if(this.x < 0)
         {
@@ -408,12 +617,23 @@ function Flake02()
             this.x = random(width + 400);
         }
 
-        if(this.y > height)
+        if((this.y > height) && (timer < 300))
         {
             this.y = random(-height-200, -50);
             this.yspeed = 1.5;
             //this.yspeed = 0; fluffy flow feel. very fall straight down
         }
+
+        if((this.y > height) && (timer > 300))
+        {
+            this.y = random(height-300, height/2-300)
+            this.yspeed = 1.5;
+            //this.yspeed = 0; fluffy flow feel. very fall straight down
+        }
+
+
+
+
     }
 
     this.show = function()
@@ -425,44 +645,43 @@ function Flake02()
 
 function Flake03()
 {
-    this.x = random(width + 400)
-    this.y = random(-height-200, -50);
+    this.x = random(width/2-50, width/2+300);
+    this.y = random(height/2-100, height/2 +50);
     this.yspeed  = 2.75;
     this.xspeed  = -1.25;
 
-    this.length = random(4, 7);
-    this.width = random(3, 5);
+    this.length = random(4, 10);
+    this.width = random(3, 8);
 
-    this.colorAlpha = random(0.3, 1);  //Fluffy alphaAdjust
+    this.colorAlpha = random(1);  //Fluffy alphaAdjust
 
     this.gravity = 0.003;
 
-    this.rotation = PI/3 + random(-10, 10)
+    this.rotation = PI/6 + random(-10, 10)
+
+    this.angle = random(PI, 2 * PI);
 
     this.fall = function()
     {
-        this.y += this.yspeed;
-        this.x += this.xspeed;
+        this.y -= (1.5 * cos(this.angle - 1));
+        this.x += (2.5 * sin(this.angle));
 
         this.yspeed += this.gravity;
 
-        if(this.x < 0)
+        if((this.x < -50) || (this.y > height + 50) ||(this.y < 0) )
         {
-            this.x = random(width + 400);
+            this.x = random(width/2-25, width);
+            this.y = random(height/2-200, height/2 +50);
+
+            this.yspeed = 1.5;
         }
 
-        if(this.y > height)
-        {
-            this.y = random(-height-200, -50);
-            this.yspeed = 1.5;
-            //this.yspeed = 0; fluffy flow feel. very fall straight down
-        }
     }
 
     this.show = function()
     {
         fill(1., 1., 1., this.colorAlpha + alphaAdjust);
-        rotate(this.rotation)
+        // rotate(this.rotation)
         ellipse(this.x, this.y, this.length, this.width);
     }
 }
@@ -523,15 +742,20 @@ function branch_upper()
         push()
             rotate(PI/5);
 
-
+                          rotate(radians(rotateDegree1));
 
             catkin1(); //////////////
             ////////////////////////////
 
-            // fill(1, 1, 1, 0.7)
-            // noStroke();
+                          fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
 
-            // bunch02(18, -16, 1, 32, 7, 1.5); ///fur
+                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+
+
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
 
 
 
@@ -546,20 +770,21 @@ function branch_upper()
 
 
 
-
+                          rotate(radians(rotateDegree2) );
 
 
         catkin1(); //////////////
         ////////////////////////////
 
-        // fill(1, 1, 1, 0.8)
-        // strokeWeight(0.75)
-        // noStroke()
+                          fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
 
-        // bunch02(18, -16, 1, 32, 7, 1.5);///fur
+                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
 
 
-        // bunch03(0, -16, 1, 32, 7, 1.5);///fur
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
 
     pop();
 
@@ -576,13 +801,40 @@ function branch_upper()
         branch(5, current_len_02/2.5);
 
         rotate(PI/5.25);
+                         rotate(radians(rotateDegree3)); 
 
         catkin2(); //////////////
         ////////////////////////////
+                                                          fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
+
+                          // bunch02(18, -16, 2, 32, 7, 1.5);///fur
+
+
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+
+
+
+
+
 
         translate(15, 15)
+
+                          rotate(radians(rotateDegree4));
         catkin2(); //////////////
         ////////////////////////////
+                                                    fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
+
+                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+
+
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
+
 
     pop();
 
@@ -593,7 +845,7 @@ function branch_upper()
 
     rotate(PI/5);
     fill(.43, 0.4, 0.31, 1.);
-    branch(6, current_len_03 * 0.4);
+    branch(6, current_len_04 * 0.6);
 
     push();
 
@@ -601,10 +853,33 @@ function branch_upper()
         fill(.15, 0.8, 0.3, 1.);
         rotate(PI/3);
         translate(-8, 0);
-        catkin1()
+
+                          rotate(radians(rotateDegree1));
+        catkin4()
+
+                                                            fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
+
+                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+
+
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
 
         translate(30, 15)
-        catkin2()
+
+                          rotate(radians(rotateDegree5));
+        catkin5()
+                                                                fill(1, 1, 1, furAlpha)
+                          stroke(1,1,1, furAlpha - 0.2)
+                          strokeWeight( 1)
+                          // noStroke()
+
+                          bunch02(18, -16, 1, 32, 7, 1.5);///fur
+
+
+                          bunch03(0, -16, 1, 32, 7, 1.5);///fur
 
 
     pop();
@@ -656,11 +931,12 @@ function catkin1()
 {   
     push()    
         fill(.15, 0.45, 0.25, 1.0);
-        stroke(1,1,1,.2);
+        noStroke();
+        // stroke(1,1,1,.4);
         translate(-8, 0);
 
         push()
-          tri(25, -15, len_tri1, 25, 7, 4);
+          tri(28, -17, len_tri1, 25, 7, 4);
         pop()
 
         push()
@@ -669,6 +945,8 @@ function catkin1()
         pop()
 
         noStroke();
+        // stroke(1,1,1,.2)
+        // strokeWeight(2);
         bunch01(22, -16, 3, len_01, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
@@ -676,6 +954,8 @@ function catkin1()
         bunch01(22, -13, 3, len_01, 6, 4);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
+        // stroke(0,0,0,.4);
+        // strokeWeight(1);
         noStroke();
         bunch01(25, -12, 4, len_01, 5, 3);//light
     pop()
@@ -689,7 +969,7 @@ function catkin2()
         translate(-8, 0);
 
         push()
-          tri(25, -15, len_tri1, 25, 7, 4);
+          tri(25, -17, len_tri1, 25, 7, 4);
         pop()
 
         push()
@@ -698,15 +978,15 @@ function catkin2()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+        bunch01(22, -16, 3, len_02, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+        bunch01(22, -13, 3, len_02, 6, 4);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_01, 5, 3);//light
+        bunch01(25, -12, 3, len_02, 5, 3);//light
     pop()
 }
 function catkin3()
@@ -726,15 +1006,15 @@ function catkin3()
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+        bunch01(22, -16, 3, len_03, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+        bunch01(22, -13, 3, len_03, 6, 4);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_01, 5, 3);//light
+        bunch01(25, -12, 3, len_03, 5, 3);//light
     pop()
 }
 function catkin4()
@@ -745,24 +1025,24 @@ function catkin4()
         translate(-8, 0);
 
         push()
-          tri(25, -15, len_tri1, 25, 7, 4);
+          tri(28, -17, len_tri3, 25, 7, 4);
         pop()
 
         push()
           rotate(PI)
-          tri2(0, 237, len_tri2, 25, 5, 4);
+          tri2(0, 237, len_tri4, 25, 5, 4); //bottom
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+        bunch01(22, -16, 3, len_04, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+        bunch01(22, -13, 3, len_04, 6, 4);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_01, 5, 3);//light
+        bunch01(25, -12, 3, len_04, 5, 3);//light
     pop()
 }
 function catkin5()
@@ -773,23 +1053,23 @@ function catkin5()
         translate(-8, 0);
 
         push()
-          tri(25, -15, len_tri1, 25, 7, 4);
+          tri(25, -17, len_tri3, 25, 7, 4);
         pop()
 
         push()
           rotate(PI)
-          tri2(0, 237, len_tri2, 25, 5, 4);
+          tri2(0, 237, len_tri4, 25, 5, 4); //bottom
         pop()
 
         noStroke();
-        bunch01(22, -16, 3, len_01, 7, 4);////catkin
+        bunch01(22, -16, 3, len_05, 7, 4);////catkin
 
         fill(.2, 0.55, 0.3, 1.0);
         noStroke();
-        bunch01(22, -13, 3, len_01, 6, 4);////catkin
+        bunch01(22, -13, 3, len_05, 6, 4);////catkin
 
         fill(.15, 0.7, 0.3, 1.);
         noStroke();
-        bunch01(25, -12, 3, len_01, 5, 3);//light
+        bunch01(25, -12, 3, len_05, 5, 3);//light
     pop()
 }
