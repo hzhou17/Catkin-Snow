@@ -465,8 +465,6 @@ if (timer > springTime + 280)
 
 
 
-
-
   fill(1, 1, 1, 1 + alphaAdjust);
   noStroke();
 
