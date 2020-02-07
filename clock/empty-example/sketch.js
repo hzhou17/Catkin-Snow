@@ -69,7 +69,8 @@ function mountain_range(width, height, scaleX, tx, ty)
           beginShape();
               for (i = -width; i < width; i+=1)
               {
-                // noFill();
+                noFill();
+
                 raise = sin(i* .1840) + 
                         sin(i* .1900) + 
                         sin(i* .1960) +  
@@ -79,7 +80,7 @@ function mountain_range(width, height, scaleX, tx, ty)
 
                 vertex(i, height/2 + raise);
               }
-          endShape(CLOSE);
+          endShape();
       pop();
 
     for (i = -width; i < width; i+=5)
@@ -132,7 +133,7 @@ function draw()
 
 
 
-      fill(0.8)
+
         mountain_range(width, height, 30, 350, -20) 
 
             mountain_range(width, height, 50, 0, 100)
