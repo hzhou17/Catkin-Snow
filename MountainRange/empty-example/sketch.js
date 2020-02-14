@@ -7,7 +7,7 @@ function remap(start, Value, end, newStart, newEnd)
     return  (newStart + (newEnd - newStart) * (Value - start)/(end - start))
 }
 
-function color_gradient(width, height, thickness) // height and width of the canvas. 
+function color_gradient(thickness) // height and width of the canvas. 
 {                            //thickness of a subdivision. The thinner, the smoother.
     let range = height - 200 //life up the canvas by 200
 
@@ -93,7 +93,7 @@ function tree(tx, ty, tree_sx, tree_sy)
 
 
 
-function mountain_range(width, height, scaleX, tx, ty, background_color, draw_tree)
+function mountain_range(scaleX, tx, ty, background_color, draw_tree)
 {
   push();
 
@@ -149,7 +149,7 @@ function setup()
     colorMode(RGB, 1);
 
 
-    color_gradient(width, height, 40)
+    color_gradient(40)
 
 
 
@@ -157,15 +157,15 @@ function setup()
 
 
 
-    mountain_range(width, height, 100, 250, 30, 0.8, 0)
+    mountain_range(100, 250, 30, 0.8, 0)
 
-    mountain_range(width, height, 100, 50, 20, 0.5, 0)
+    mountain_range(100, 50, 20, 0.5, 0)
 
-    mountain_range(width, height, 100, 350, 80, 0.4, 0) //scaleX, tx, ty, color, alpha, draw_tree
+    mountain_range(100, 350, 80, 0.4, 0) //scaleX, tx, ty, color, alpha, draw_tree
 
-    mountain_range(width, height, 50, 350, 150, 0.2, 1) 
+    mountain_range(50, 350, 150, 0.2, 1) 
 
-    mountain_range(width, height, 30, -500, 300, 0.1, 1)
+    mountain_range(30, -500, 300, 0.1, 1)
 
 }
 
