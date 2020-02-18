@@ -410,9 +410,6 @@ if (timer > springTime + 300)
 }
 
 
-
-
-
 if (timer > springTime + 280)
 {
   if (furAlpha < 0.55) furAlpha+=0.01;
@@ -420,11 +417,9 @@ if (timer > springTime + 280)
 }
 
 
-
-
   noStroke();
 
-  if (timer < 400)
+  if (timer < 420)
   {
     for (var i = 0; i < flakes01.length; i++)
     {
@@ -433,7 +428,12 @@ if (timer > springTime + 280)
     }
   }
 
-
+  push()
+      stroke(0.2, 0.1, 0.1, 0.5);
+      fill(.35, 0.2, 0.1, 0.8);
+      branch_base()
+      branch_lower();
+  pop()
 
 
 
@@ -456,19 +456,14 @@ if (timer > springTime + 280)
   pop()
 
 
-  push()
-      stroke(0.2, 0.1, 0.1, 0.5);
-      fill(.35, 0.2, 0.1, 0.8);
-      branch_base()
-      branch_lower();
-  pop()
+
 
 
 
   fill(1, 1, 1, 1 + alphaAdjust);
   noStroke();
 
-    if (timer < 400)
+    if (timer < 420)
   {
     for (var i = 0; i < flakes02.length; i++)
     {
@@ -498,38 +493,27 @@ function Flake01()
 {
     this.x = random(0, width + 400);
     this.y = random(-height, -50);
-    this.yspeed  = 1.5;
-    this.xspeed  = -.5;
-
+    this.yspeed  = random(1, 2);
+    this.xspeed  = random(-0.75, -0.25);
 
     this.size = random(2,5);
 
-    this.colorAlpha = random(1);
+    this.colorAlpha = random(0, 0.8);
 
     this.fall = function()
     {
         this.y += this.yspeed;
         this.x += this.xspeed;
 
-
-        if((this.y > height) && (timer < 300))
+        if((this.y > height) && (timer < 350))
         {
             this.y = random(-height, -50)
         }
-
-        if((this.y > height) && (timer > 300))
-        {
-            this.y = random(height-300, height/2-300)
-        }
-
-
-
 
         if(this.x < 0)
         {
             this.x = random(width + 400);
         }
-
     }
 
     this.show = function()
@@ -537,23 +521,23 @@ function Flake01()
         fill(1., 1., 1., this.colorAlpha + alphaAdjust);
         circle(this.x, this.y, this.size);
     }
-
-
 }
 
 function Flake02()
 {
     this.x = random(width + 400)
-    this.y = random(-height-200, -50);
-    this.yspeed  = 2.75;
-    this.xspeed  = -1.25;
+    this.y = random(-height, 0);
+    this.yspeed  = random(1.5, 3.5);
+    this.xspeed  = random(-1, -1.5);
 
-    this.length = random(4, 7);
-    this.width = random(3, 5);
+    this.length = random(3.5, 7.5);
+    this.width = random(2.5, 5.5);
 
-    this.colorAlpha = random(0.3, 1);  //Fluffy alphaAdjust
+    this.colorAlpha = random(0.2, 1);  //Fluffy alphaAdjust
 
     this.gravity = 0.003;
+
+    this.ranSpeed = random(2, 3.5);;
 
     this.fall = function()
     {
@@ -567,22 +551,12 @@ function Flake02()
             this.x = random(width + 400);
         }
 
-        if((this.y > height) && (timer < 300))
+        if((this.y > height) && (timer < 350))
         {
             this.y = random(-height-200, -50);
-            this.yspeed = 1.5;
+            this.yspeed = this.ranSpeed;
             //this.yspeed = 0; fluffy flow feel. very fall straight down
         }
-
-        if((this.y > height) && (timer > 300))
-        {
-            this.y = random(height-300, height/2-300)
-            this.yspeed = 1.5;
-            //this.yspeed = 0; fluffy flow feel. very fall straight down
-        }
-
-
-
 
     }
 
@@ -635,6 +609,52 @@ function Flake03()
         ellipse(this.x, this.y, this.length, this.width);
     }
 }
+
+function Flake04()
+{
+    this.x = random(width + 400)
+    this.y = random(-height, 0);
+    this.yspeed  = random(1.25, 2.25);
+    this.xspeed  = random(-0.75, -1.25);
+
+    this.length = random(2.5, 5.5);
+    this.width = random(1.5, 3.5);
+
+    this.colorAlpha = random(0.3, 0.85);  //Fluffy alphaAdjust
+
+    this.gravity = 0.003;
+
+    this.ranSpeed = random(1, 1.5);
+
+    this.fall = function()
+    {
+        this.y += this.yspeed;
+        this.x += this.xspeed;
+
+        this.yspeed += this.gravity;
+
+        if(this.x < 0)
+        {
+            this.x = random(width + 400);
+        }
+
+        if((this.y > height) && (timer < 350))
+        {
+            this.y = random(-height-200, -50);
+            this.yspeed = this.ranSpeed;
+        }
+    }
+
+    this.show = function()
+    {
+        fill(1., 1., 1., this.colorAlpha + alphaAdjust);
+        ellipse(this.x, this.y, this.length, this.width);
+    }
+}
+
+
+
+
 
 function horizon()
 {
