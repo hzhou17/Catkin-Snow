@@ -4,15 +4,6 @@ var flakes02 = [];
 var flakes03 = [];
 var flakes04 = [];
 
-let num
-
-function preload()
-{
-  num = loadSrtings('numbers.txt')
-}
-
-
-
 
 function color_gradient(thickness) // height and width of the canvas. 
 {                            //thickness of a subdivision. The thinner, the smoother.
@@ -24,7 +15,7 @@ function color_gradient(thickness) // height and width of the canvas.
 
       push();
                                                          //Finer sky color adjustment
-        fill(new_color - num, new_color - num, new_color + num); //for the blue background 
+        fill(new_color - 0.3, new_color - 0.3, new_color + 0.3); //for the blue background 
         noStroke()                                               
         rect(0, i, width, thickness);
 
@@ -38,14 +29,13 @@ function color_gradient(thickness) // height and width of the canvas.
 // #################################################################
 function setup()
 {
-   noCursor()
+  noCursor()
 
   createCanvas(1280, 720);
 
   colorMode(RGB, 1);
 
   color_gradient(1)
-
 
 
 
@@ -77,24 +67,10 @@ function setup()
 }
 
 
-function draw()
+function draw() 
 {
 
-  color_gradient(1)
-
-
-pole_faceRight(-400, 0, 1, 1)    //(tx, ty, sx, sy)
-
-
-push()   //mirror the light pole
-translate(width/2, 0)
-scale(-1, 1)
-pole_faceRight(-1000, 0, 1, 1)  
-pop()
-
-
-
-//pole_faceLeft(200, 0, 1, 1)
+  color_gradient(1) // Do't refresh background.
 
 
   noStroke();
@@ -133,18 +109,4 @@ pop()
 
 
 }
-
-
-// ################################################################
-// ################################################################
-// ################################################################
-
-
-
-// function horizon()
-// {
-//   triangle(0, height*0.75, 0, height, width*0.6, height);
-
-//   // triangle()
-// }
 

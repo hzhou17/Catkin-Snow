@@ -37,10 +37,10 @@ function Flake00()	//different layers of snow. the smaller the name index (00, 0
 
 		let distance = dist(this.x, this.y, mouseX, mouseY)			//calculate distance to mouse cursor.
 
-		if (distance > 150) this.alphaAdjust = 0;					// if too far, set alpha to 0. make it disappear
+		if (distance > 100) this.alphaAdjust = 0;					// if too far, set alpha to 0. make it disappear
 		else 
 		{
-			this.alphaAdjust = map(distance, 0, 150, 1, 0.9)		// if close enough, then show. slight adjust alpha value based 
+			this.alphaAdjust = map(distance, 0, 100, 1, 0.9)		// if close enough, then show. slight adjust alpha value based 
 		}															// the distance, so that the edge ones are less bright.
 
         ellipse(this.x, this.y, this.length, this.width);
@@ -84,10 +84,10 @@ function Flake01()
 
 		let distance = dist(this.x, this.y, mouseX, mouseY)
 
-		if (distance > 150) this.alphaAdjust = 0;
+		if (distance > 100) this.alphaAdjust = 0;
 		else 
 		{
-			this.alphaAdjust = map(distance, 0, 150, 1, 0.9)
+			this.alphaAdjust = map(distance, 0, 100, 1, 0.9)
 		}
 
         circle(this.x, this.y, this.size);
@@ -149,10 +149,10 @@ function Flake02()
 
 			let distance = dist(this.x, this.y, mouseX, mouseY)
 
-				if (distance > 150) this.alphaAdjust = 0;
+				if (distance > 100) this.alphaAdjust = 0;
 				else 
 				{
-					this.alphaAdjust = map(distance, 0, 150, 1, 0.9)
+					this.alphaAdjust = map(distance, 0, 100, 1, 0.9)
 				}
 
 
@@ -205,10 +205,10 @@ function Flake03()
 		let distance = dist(this.x, this.y, mouseX, mouseY)
 
 
-		if (distance > 150) this.alphaAdjust = 0;
+		if (distance > 100) this.alphaAdjust = 0;
 		else 
 		{
-			this.alphaAdjust = map(distance, 0, 150, 1, 0.9)
+			this.alphaAdjust = map(distance, 0, 100, 1, 0.9)
 		}
 
 

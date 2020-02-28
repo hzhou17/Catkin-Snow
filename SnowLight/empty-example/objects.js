@@ -5,7 +5,7 @@ function pole_faceRight(tx, ty, sx, sy)
 {
     push()
 
-        translate(width/2 - 7.5, height) 
+        translate(width/2 - 7.5, height) //middle, bottom of the canvas
         translate(tx, ty)
         scale(sx, sy)
 
@@ -27,7 +27,7 @@ function pole_faceRight(tx, ty, sx, sy)
 
 
         translate(0, -100)  
-        circle(40, 0, 50)
+        circle(40, 0, 50) // light
 
     pop()
 }
