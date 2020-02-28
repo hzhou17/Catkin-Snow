@@ -1,56 +1,28 @@
-let img
-
-
-const X_AXIS = 2;
-const Y_AXIS = 1;
-
+var flakes00 = [];
 var flakes01 = [];
 var flakes02 = [];
 var flakes03 = [];
 var flakes04 = [];
 
 
-let black, white, blueColor;
 
-var timer;
+function color_gradient(thickness) // height and width of the canvas. 
+{                            //thickness of a subdivision. The thinner, the smoother.
+    let range = height //life up the canvas by 200
 
-var springTime = 300;
+    for (i = 0; i < range; i+= thickness)
+    {
+      var new_color = map(i, 0, range, 0.5, 0);
 
-var alphaAdjust;
+      push();
+                                                         //Finer sky color adjustment
+        fill(new_color - 0.3, new_color - 0.1, new_color + 0.3); //for the blue background 
+        noStroke()                                               
+        rect(0, i, width, thickness);
 
-
-
-
-var furAlpha;
-
-
-function setGradient(x, y, w, h, c1, c2, axis) //from Processing Example
- {
-  noFill();
-
-  if (axis === Y_AXIS) {
-    // Top to bottom gradient
-    for (let i = y; i <= y + h; i+=0.5) {
-      let inter = map(i, y, y + h, 0, 1);
-      let c = lerpColor(c1, c2, inter);
-      stroke(c);
-      line(x, i, x + w, i);
+      pop();
     }
-  } else if (axis === X_AXIS) {
-    // Left to right gradient
-    for (let i = x; i <= x + w; i+=0.5) {
-      let inter = map(i, x, x + w, 0, 1);
-      let c = lerpColor(c1, c2, inter);
-      stroke(c);
-      line(i, y, i, y + h);
-    }
-  }
 }
-
-
-
-
-
 
 
 // #################################################################
@@ -58,13 +30,23 @@ function setGradient(x, y, w, h, c1, c2, axis) //from Processing Example
 // #################################################################
 function setup()
 {
-
+   noCursor()
 
   createCanvas(1280, 720);
 
   colorMode(RGB, 1);
 
-  for (var i = 0; i < 400; i++)
+  color_gradient(1)
+
+
+
+
+  for (var i = 0; i < 500; i++)
+  {
+    flakes00[i] = new Flake00();
+  }
+
+  for (var i = 0; i < 500; i++)
   {
     flakes01[i] = new Flake01();
   }
@@ -74,58 +56,47 @@ function setup()
     flakes02[i] = new Flake02();
   }
 
-  for (var i = 0; i < 150; i++)
+  for (var i = 0; i < 200; i++)
   {
     flakes03[i] = new Flake03();
   }
 
-
-  for (var i = 0; i < 200; i++)
+  for (var i = 0; i < 100; i++)
   {
     flakes04[i] = new Flake04();
   }
 
-
-  white = color(0.95);
-  black = color(0);
-  blueColor = color(0.3, 0.5, 0.8);
-  range = 0;
-  timer = 0;
-
-  alphaAdjust = 0;
-
-
-
-  furAlpha = 0;
-
-  bar = 100;
 }
 
 
 function draw()
 {
-  // print (height/2-50)
-  // print(PI/6)
-  
 
-  timer += 1;
-
-  colorTrans = lerpColor(black, blueColor, range);
-
-  background(colorTrans);
+  color_gradient(1)
 
 
-  setGradient(0, 100, width, height, colorTrans, white, Y_AXIS);
+pole_faceRight(-400, 0, 1, 1)    //(tx, ty, sx, sy)
 
-  // setGradient(0, 0, width / 2, height, white, blueColor, X_AXIS);
+
+push()   //mirror the light pole
+translate(width/2, 0)
+scale(-1, 1)
+pole_faceRight(-1000, 0, 1, 1)  
+pop()
 
 
 
+//pole_faceLeft(200, 0, 1, 1)
 
 
   noStroke();
 
 
+    for (var i = 0; i < flakes00.length; i++)
+    {
+      flakes00[i].fall();
+      flakes00[i].show();
+    }
 
     for (var i = 0; i < flakes01.length; i++)
     {
@@ -140,6 +111,12 @@ function draw()
       flakes02[i].show();
     }
 
+    for (var i = 0; i < flakes03.length; i++)
+    {
+      flakes03[i].fall();
+      flakes03[i].show();
+    }
+
     for (var i = 0; i < flakes04.length; i++)
     {
       flakes04[i].fall();
@@ -147,12 +124,6 @@ function draw()
     }
 
 
-
-    // for (var i = 0; i < flakes03.length; i++)
-    // {
-    //   flakes03[i].fall();
-    //   flakes03[i].show();
-    // }
 }
 
 
@@ -162,10 +133,10 @@ function draw()
 
 
 
-function horizon()
-{
-  triangle(0, height*0.75, 0, height, width*0.6, height);
+// function horizon()
+// {
+//   triangle(0, height*0.75, 0, height, width*0.6, height);
 
-  // triangle()
-}
+//   // triangle()
+// }
 

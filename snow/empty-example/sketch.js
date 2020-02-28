@@ -2,21 +2,12 @@ let img
 
 var bar;
 
-const X_AXIS = 2;
-const Y_AXIS = 1;
+
 
 var flakes01 = [];
 var flakes02 = [];
 var flakes03 = [];
 var flakes04 = [];
-
-var base_branch_len = 300;
-var branch_up1_len = 300;
-var branch_up2_len = 150;
-var branch_down1_len = 125;
-var branch_down2_len = 200;
-
-var branch_small_len = 100;
 
 
 let black, white, blueColor;
@@ -27,125 +18,31 @@ var springTime = 300;
 
 var alphaAdjust;
 
-var current_len_01, current_len_02, current_len_03, 
-    current_len_04,current_len_05, current_len_06;
-
-var len_01, len_02, len_03, len_04, len_05, len_tri1, len_tri2, len_tri3, len_tri4;
-
-
-var rotateRight1, rotateRight2, rotateRight3, rotateRight4;
-
-
-var rotateDegree1, rotateDegree2, rotateDegree3, rotateDegree4;
 
 
 var furAlpha;
 
 
-function setGradient(x, y, w, h, c1, c2, axis) //from Processing Example
- {
-  noFill();
+function color_gradient(thickness) // height and width of the canvas. 
+{                            //thickness of a subdivision. The thinner, the smoother.
+    let range = height - 200 //life up the canvas by 200
 
-  if (axis === Y_AXIS) {
-    // Top to bottom gradient
-    for (let i = y; i <= y + h; i+=0.5) {
-      let inter = map(i, y, y + h, 0, 1);
-      let c = lerpColor(c1, c2, inter);
-      stroke(c);
-      line(x, i, x + w, i);
-    }
-  } else if (axis === X_AXIS) {
-    // Left to right gradient
-    for (let i = x; i <= x + w; i+=0.5) {
-      let inter = map(i, x, x + w, 0, 1);
-      let c = lerpColor(c1, c2, inter);
-      stroke(c);
-      line(i, y, i, y + h);
-    }
-  }
-}
-
-
-function rect_Dots(tx, ty, len, wid, sizeX, sizeY, noiseX, noiseY)
-{
-      for(var i = 0; i < len; i++)
+    for (i = 0; i < range; i+= thickness)
     {
-         for(var j = 0; j < wid; j++)
-         {
-            push();
+      var new_color = remap(0, i, range, 0, 0.7);
 
-                translate(tx, ty);
-                rotate(PI)
-                translate(6*i , 8.5*j);
-                translate(noiseX*noise(i, j), noiseY*noise(i, j))
+      push();
+                                                         //Finer sky color adjustment
+        fill(new_color - 0.3, new_color - 0.1, new_color + 0.3); //for the blue background 
+        noStroke()                                               
+        rect(0, i, width, thickness);
 
-                    ellipse(0, 0, sizeX, sizeY);
-            pop();
-         }
-
+      pop();
     }
 }
 
-function tri(x, y, len, wid, sizeX, sizeY)
-{
-      for(var i = 0; i < len; i++)
-    {
-         for(var j = 0; j < i; j++)
-         {
 
-            push();
-            translate(x, y);
-            rotate(3*PI/4)
-            translate(4*i , 4*j);
-            translate(2*noise(i, j), 2*noise(i, j))
-            ellipse(0, 0, sizeX, sizeY);
-            pop();
 
-         }
-    }
-}
-
-function tri2(x, y, len, wid, sizeX, sizeY)
-{
-      for(var i = 0; i < len; i++)
-    {
-         for(var j = 0; j < i+1; j++)
-         {
-
-            push();
-            translate(x, y);
-            rotate(3*PI/4)
-            translate(4*i , 4*j);
-            translate(2*noise(i, j), 2*noise(i, j))
-            ellipse(0, 0, sizeX, sizeY);
-            pop();
-         }
-    }
-}
-
-function white_Fur(x, y, length, sizeX, sizeY, PI_denominator)
-{
-      for(var i = 0; i < 1; i++)
-    {
-         for(var j = 0; j < length; j++)
-         {
-            push();
-            
-                translate(x, y);
-                rotate(PI) 
-
-                translate(6*i , 7*j);
-
-                translate(10*noise(i, j), 10*noise(i, j))
-
-                rotate(PI/PI_denominator + noise(i, j) )
-
-                    ellipse(0, 0, sizeX, sizeY);
-
-            pop();
-         }
-    }
-}
 
 
 // #################################################################

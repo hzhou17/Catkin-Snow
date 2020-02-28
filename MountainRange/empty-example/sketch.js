@@ -146,7 +146,7 @@ function setup()
     colorMode(RGB, 1);
 
 
-    color_gradient(1)
+    color_gradient(40)
 
 
 
