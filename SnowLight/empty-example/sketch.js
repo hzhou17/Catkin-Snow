@@ -5,6 +5,15 @@ var flakes03 = [];
 var flakes04 = [];
 
 
+
+var num
+
+
+
+
+
+
+
 function color_gradient(thickness) // height and width of the canvas. 
 {                            //thickness of a subdivision. The thinner, the smoother.
     let range = height //life up the canvas by 200
@@ -15,7 +24,7 @@ function color_gradient(thickness) // height and width of the canvas.
 
       push();
                                                          //Finer sky color adjustment
-        fill(new_color - 0.3, new_color - 0.3, new_color + 0.3); //for the blue background 
+        fill(new_color - num, new_color - num, new_color + num); //for the blue background 
         noStroke()                                               
         rect(0, i, width, thickness);
 
@@ -29,7 +38,7 @@ function color_gradient(thickness) // height and width of the canvas.
 // #################################################################
 function setup()
 {
-  noCursor()
+   noCursor()
 
   createCanvas(1280, 720);
 
@@ -37,6 +46,7 @@ function setup()
 
   color_gradient(1)
 
+  num = 0.2
 
 
   for (var i = 0; i < 500; i++)
@@ -67,10 +77,22 @@ function setup()
 }
 
 
-function draw() 
+function draw()
 {
 
-  color_gradient(1) // Do't refresh background.
+  color_gradient(1)
+
+
+pole_faceRight(-400, 0, 1, 1)    //(tx, ty, sx, sy)
+
+
+push()   //mirror the light pole
+translate(width/2, 0)
+scale(-1, 1)
+pole_faceRight(-1000, 0, 1, 1)  
+pop()
+
+
 
 
   noStroke();
