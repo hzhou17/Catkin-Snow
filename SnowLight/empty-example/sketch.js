@@ -4,6 +4,14 @@ var flakes02 = [];
 var flakes03 = [];
 var flakes04 = [];
 
+let num
+
+function preload()
+{
+  num = loadSrtings('numbers.txt')
+}
+
+
 
 
 function color_gradient(thickness) // height and width of the canvas. 
@@ -16,7 +24,7 @@ function color_gradient(thickness) // height and width of the canvas.
 
       push();
                                                          //Finer sky color adjustment
-        fill(new_color - 0.3, new_color - 0.1, new_color + 0.3); //for the blue background 
+        fill(new_color - num, new_color - num, new_color + num); //for the blue background 
         noStroke()                                               
         rect(0, i, width, thickness);
 
