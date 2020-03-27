@@ -31,7 +31,7 @@ function Flake00()	//different layers of snow. the smaller the name index (00, 0
 
     }
 
-    this.show = function()
+    this.display = function()
     {
         fill(1., 1., 1., this.colorAlpha * this.alphaAdjust);
 
@@ -78,7 +78,7 @@ function Flake01()
         }
     }
 
-    this.show = function()
+    this.display  = function()
     {
         fill(1., 1., 1., this.colorAlpha * this.alphaAdjust);
 
@@ -140,7 +140,7 @@ function Flake02()
 
     }
 
-    this.show = function()
+    this.display  = function()
     {
 
         	fill(1., 1., 1., this.colorAlpha * this.alphaAdjust);
@@ -198,7 +198,7 @@ function Flake03()
         }
     }
 
-    this.show = function()
+    this.display = function()
     {
         fill(1., 1., 1., this.colorAlpha * this.alphaAdjust);
 
@@ -254,7 +254,7 @@ function Flake04() //this layers is not affected by the mouse.
         }
     }
 
-    this.show = function()
+    this.display = function()
     {
         fill(1., 1., 1., this.colorAlpha);
 
