@@ -20,10 +20,11 @@ function Windows00(buildingLen, buildingHeight, building_xoff) //the length and 
 
         for (var i = 0; i < this.x_range; i += buildingLen/2)
         {
+            //translate(this.x_offset * (i + 1), 0)
             for (var j = 0; j < this.y_range; j += buildingHeight/2)
             {
               push()
-                translate(i , j)
+                translate(i, j)
                 rect(buildingLen/4 - this.x/2, this.y_offset, this.x, this.y) //creation y value is based on y_offst, the height of the building
               pop()
             }

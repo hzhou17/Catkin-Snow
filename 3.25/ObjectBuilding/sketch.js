@@ -37,24 +37,17 @@ function setup()
 	}
 
 
-
-
-
 // #############################################################################################
 //Call functions.
 
 	push()
 	  for (var i = 0; i < num; i++)
 	  {
-  		buildingList[i].show();
 
-	    if (i < buildingList.length -1)
-	    {
-	      if ((buildingList[i+1].x) < (buildingList[i].x))
-	        {
-	          translate((buildingList[i].x) - (buildingList[i+1].x), 0)
-	        }
-	    }
+	  		buildingList[i].show();
+
+  		 	additional_translateX(i)
+
 	  }
 	pop()
 
@@ -62,32 +55,12 @@ function setup()
 	push()
 		for (var i = 0; i < num; i++)
 		{
-			windowList[i].show();
-
-		    if (i < buildingList.length -1)
-		    {
-		      if ((buildingList[i+1].x) < (buildingList[i].x))
-		        {
-		          translate((buildingList[i].x) - (buildingList[i+1].x), 0)
-		        }
-		    }
-
-
-
-
-
-
-
-
-
-
-
 			
+			windowList[i].show()
+
+	  		additional_translateX(i)
+
 		}
-
-
-
-
 	pop() 
 
 
@@ -95,6 +68,8 @@ function setup()
 		for (var i = 0; i < num; i++)
 		{
 			storeyList[i].show();
+
+			additional_translateX(i)
 		}
 	pop() 
 
@@ -163,4 +138,15 @@ function color_gradient(thickness) // height and width of the canvas.
 
       pop();
     }
+}
+
+function additional_translateX(i)
+{
+    if (i < buildingList.length -1)
+	{
+  		if ((buildingList[i+1].x) < (buildingList[i].x))
+	    {
+	      translate((buildingList[i].x) - (buildingList[i+1].x), 0)
+	    }
+	}
 }
