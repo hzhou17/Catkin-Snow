@@ -4,63 +4,111 @@ var windowList = []
 
 var storeyList = []
 
-var num
+var num = 10; //number of buildings
 
 
 
 function setup()
 {
-  colorMode(RGB, 1);
-  createCanvas(1280, 720);
-  background(0.5)
+	colorMode(RGB, 1);
+	createCanvas(1280, 720);
+	background(0.5)
 
-  color_gradient(40)
+	color_gradient(40)
 // #############################################################################################
+//Put Objects into their Arrays
 
-  for (var i = 0; i < 10; i++)         //put BUILDINGS into its Array
-  {
-    buildingList[i] = new Building00(i); //(noise_index)
-  }
+	for (var i = 0; i < 10; i++)         //put BUILDINGS into its Array
+	{
+	buildingList[i] = new Building00(i); //(noise_index)
+	}
 
 
-  for (var i = 0; i < 10; i++)         //put WINDOWS into its Array
-  {
-    windowList[i] = new Windows(buildingList[i].x, buildingList[i].y,
-                                buildingList[i].offset);
-  }
+	for (var i = 0; i < 10; i++)         //put WINDOWS into its Array
+	{
+	windowList[i] = new Windows00(buildingList[i].x, buildingList[i].y,
+	                            buildingList[i].offset);
+	}
 
-  for (var i = 0; i < 10; i++)         //put WINDOWS into its Array
-  {
-    storeyList[i] = new Storey00(buildingList[i].x, buildingList[i].y,
-                                 buildingList[i].offset);
-  }
+	for (var i = 0; i < 10; i++)         //put WINDOWS into its Array
+	{
+	storeyList[i] = new Storey00(buildingList[i].x, buildingList[i].y,
+	                             buildingList[i].offset);
+	}
 
 
 
 
 
 // #############################################################################################
+//Call functions.
 
-  for (var i = 0; i < buildingList.length; i++)
-  {
-    buildingList[i].show();
+	push()
+	  for (var i = 0; i < num; i++)
+	  {
+  		buildingList[i].show();
+
+	    if (i < buildingList.length -1)
+	    {
+	      if ((buildingList[i+1].x) < (buildingList[i].x))
+	        {
+	          translate((buildingList[i].x) - (buildingList[i+1].x), 0)
+	        }
+	    }
+	  }
+	pop()
 
 
-    if (i < buildingList.length -1)
-    {
-      if ((buildingList[i+1].x) < (buildingList[i].x))
-        {
-          translate((buildingList[i].x) - (buildingList[i+1].x), 0)
-        }
-    }
-  }
+	push()
+		for (var i = 0; i < num; i++)
+		{
+			windowList[i].show();
+
+		    if (i < buildingList.length -1)
+		    {
+		      if ((buildingList[i+1].x) < (buildingList[i].x))
+		        {
+		          translate((buildingList[i].x) - (buildingList[i+1].x), 0)
+		        }
+		    }
+
+
+
+
+
+
+
+
+
+
+
+			
+		}
+
+
+
+
+	pop() 
+
+
+	push()
+		for (var i = 0; i < num; i++)
+		{
+			storeyList[i].show();
+		}
+	pop() 
+
+
+ // #############################################################################################
 
 }
 
 function draw()
 {
-  windowList[0].show();
-  storeyList[0].show();
+
+
+  // windowList[0].show();
+  //storeyList[0].show();
 }
 
 
@@ -82,7 +130,7 @@ function Building00(noise_index)
 
     this.show = function()
     {
-      fill(0)
+      fill(0.5)
 
       rect(this.x, this.y, this.x, height)
 
