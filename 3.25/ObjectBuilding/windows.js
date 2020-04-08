@@ -1,7 +1,7 @@
-function Windows00(buildingLen, buildingHeight, building_xoff) //the length and height of the build the windows belong to. x and y translation offset.
+function Windows00(buildingLen, buildingHeight, building_xoff, noise_index) //the length and height of the build the windows belong to. x and y translation offset.
 {
     this.x = buildingLen/10
-    this.y = this.x * random(0.5, 2)
+    this.y = this.x * map(noise(noise_index*50), 0, 1, 0.75, 1.4)
 
 
     this.x_range = buildingLen;
@@ -9,19 +9,22 @@ function Windows00(buildingLen, buildingHeight, building_xoff) //the length and 
 
 
     this.x_offset = building_xoff// + (buildingLen/2)/2;
-    this.y_offset = this.y_range * random(1.2, 2);
+    this.y_offset = this.y_range * map(noise(noise_index*150), 0, 1, 1.2, 2);
 
-    this.win_col = floor(random(0, 5))+1
+    this.win_col = floor(noise(noise_index*100)*5)+1
 
 
 
 
     this.show = function()
     {
-        fill(0.8, 0.8, 0.1)
+        fill(0.6, 0.5, 0.1)
 
         translate(this.x_offset, 0) //horizontally move onto the building.
 
+
+      // if((floor(random(0, 1)*300) > 0) && (floor(random(0, 1)*300) < 250))
+      // {
         for (var i = 0; i < this.x_range; i += buildingLen/2)
         {
             //translate(this.x_offset * (i + 1), 0)
@@ -33,6 +36,7 @@ function Windows00(buildingLen, buildingHeight, building_xoff) //the length and 
               pop()
             }
         }
-    }
+      }
+    // }
 
 }
