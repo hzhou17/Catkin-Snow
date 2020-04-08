@@ -1,7 +1,7 @@
 function Windows00(buildingLen, buildingHeight, building_xoff) //the length and height of the build the windows belong to. x and y translation offset.
 {
     this.x = buildingLen/10
-    this.y = buildingHeight/15
+    this.y = this.x * random(0.5, 2)
 
 
     this.x_range = buildingLen;
@@ -9,7 +9,11 @@ function Windows00(buildingLen, buildingHeight, building_xoff) //the length and 
 
 
     this.x_offset = building_xoff// + (buildingLen/2)/2;
-    this.y_offset = this.y_range * 1.1;
+    this.y_offset = this.y_range * random(1.2, 2);
+
+    this.win_col = floor(random(0, 5))+1
+
+
 
 
     this.show = function()
@@ -21,7 +25,7 @@ function Windows00(buildingLen, buildingHeight, building_xoff) //the length and 
         for (var i = 0; i < this.x_range; i += buildingLen/2)
         {
             //translate(this.x_offset * (i + 1), 0)
-            for (var j = 0; j < this.y_range; j += buildingHeight/2)
+            for (var j = 0; j < this.y_range; j += buildingHeight/this.win_col)
             {
               push()
                 translate(i, j)
