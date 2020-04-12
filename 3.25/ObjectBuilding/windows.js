@@ -15,10 +15,9 @@ function Windows00(buildingLen, buildingHeight, building_xoff, noise_index) //th
 
 
 
-
     this.show = function()
     {
-        fill(0.6, 0.5, 0.1)
+        fill(0.7, 0.6, 0.1)
 
         translate(this.x_offset, 0) //horizontally move onto the building.
 
@@ -33,7 +32,7 @@ function Windows00(buildingLen, buildingHeight, building_xoff, noise_index) //th
               push()
                 translate(i, j)
                 rect(buildingLen/4 - this.x/2, this.y_offset, this.x, this.y) //creation y value is based on y_offst, the height of the building
-              pop()
+              pop()                                                           //buildingLen/4 - this.x/2: makes the windows to be in the center of the building    
             }
         }
       }

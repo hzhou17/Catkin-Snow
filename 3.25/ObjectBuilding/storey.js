@@ -21,6 +21,8 @@ function Storey00(buildingLen, buildingHeight,
         if(darkness == 0)
         {
           fill(map(noise(noise_index*0.2), 1, 0, 0.2, 0))
+          //stroke(map(noise(noise_index*0.2), 1, 0, 0.2, 0))
+          strokeWeight(1)
         }
         else
         {

@@ -15,7 +15,7 @@ function setup()
 	createCanvas(1280, 720);
 	background(0.5)
 
-	color_gradient(40)	
+  	color_gradient(40)
 // #############################################################################################
 //Put Objects into their Arrays
 	for (var i = 0; i < 20; i++) 
@@ -27,15 +27,12 @@ function setup()
 // #############################################################################################
 //Call functions.
 push()
-translate(-200, -50)
-scale(0.8, 0.8)
+	translate(-200, -50)
+	scale(0.8, 0.8)
 
-building_layer(0, 0, 1)//(iStart, windows, darkness), backgound layer
+	building_layer(0, 0, 1)//(iStart, windows, darkness), backgound layer
 
 pop()
-
-
- //front layer
 
 
  // #############################################################################################
@@ -43,27 +40,21 @@ pop()
 
 
 function draw()
-{
-
-	  noStroke();
-  for (var i = 0; i < particlesList.length; i++)
-  {
-  		//particlesList.scale += 0.1;
+{	
+  	// color_gradient(40)
 
 
+	//color_gradient(40)	
+	for (var i = 0; i < particlesList.length; i++)
+	{
   		particlesList[i].show();
+	}
 
-  }
-translate(-250, -50)
-// building_layer(0, 0, 1)
-// building_layer(500, 0, 1)
-
-building_layer(300, 1, 0)
-
-//color_gradient.R += 0.01;
 	
+	building_layer(350, 1, 0)
+	translate(-250, -50)
 
-
+	//building_layer(300, 1, 0)
 }
 
 
@@ -90,15 +81,15 @@ function Building00(noise_index, darkness)
     {
     	this.color = map(noise(noise_index*0.2), 1, 0, 0.2, 0)	//*.2 to reduce frequency, so that color doesn't change too much across the scene
       	fill(this.color)
+
+      	stroke(this.color - 0.15)
+      	strokeWeight(1.5)
     }
     else //background layer
     {
     	fill(0.2, 0.1, 0.5)
-    	noStroke()
+    	//noStroke()
     }  
-
-
-
       rect(this.x, this.y, this.x, this.y + height)
 
       translate(this.offset, 0)
@@ -106,29 +97,21 @@ function Building00(noise_index, darkness)
 }
 
 
-
 function color_gradient(thickness) //thickness of a subdivision. The thinner, the smoother.
 {                            
     for (i = 0; i < height; i+= thickness)
     {
-      this.R = map(i, 0, height, 0.2, 0.5);
+      this.R = map(i, 0, height, 0.2, 0.55);
       this.G = map(i, 0, height, 0.1, 0.2);
       this.B = map(i, 0, height, 0.5, 0.6);
 
-
-  	push();
-
-        fill(this.R, this.G, B); //purple
+        fill(this.R, this.G, this.B); //purple
 
         noStroke()  
 
         rect(0, i, width, thickness);
-
-  	pop();
-
     }
 }
-
 
 
 function building_layer(iStart, windows, darkness)
@@ -137,7 +120,6 @@ function building_layer(iStart, windows, darkness)
 	{
 	buildingList[i] = new Building00(i, darkness); //(noise_index)
 	}
-
 
 	for (var i = 0+iStart; i < 10+iStart; i++)         //put WINDOWS into its Array
 	{
@@ -151,15 +133,12 @@ function building_layer(iStart, windows, darkness)
 	                             buildingList[i].offset, i, darkness);
 	}
 
-
 	push()
 	  for (var i = 0+iStart; i < num+iStart; i++)
 	  {
-
 	  		buildingList[i].show();
 
   		 	additional_translateX(i)
-
 	  }
 	pop()
 
@@ -167,19 +146,16 @@ function building_layer(iStart, windows, darkness)
 	{	
 		push()
 		for (var i = 0+iStart; i < num+iStart; i++)
-		{
-			
+		{			
 			windowList[i].show()
 
 	  		additional_translateX(i)
-
 		}
 		pop() 
 	}
 
-
-	push()
-		
+	push()	
+		stroke(0)	
 		for (var i = 0+iStart; i < num+iStart; i++)
 		{
 			storeyList[i].show();
