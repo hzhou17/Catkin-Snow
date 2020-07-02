@@ -18,7 +18,7 @@ function setup()
   	color_gradient(40)
 // #############################################################################################
 //Put Objects into their Arrays
-	for (var i = 0; i < 20; i++) 
+	for (var i = 0; i < 20; i++)
 	{
 		particlesList[i] = new Particles00();
 	}
@@ -40,17 +40,17 @@ pop()
 
 
 function draw()
-{	
+{
   	// color_gradient(40)
 
 
-	//color_gradient(40)	
+	//color_gradient(40)
 	for (var i = 0; i < particlesList.length; i++)
 	{
   		particlesList[i].show();
 	}
 
-	
+
 	building_layer(350, 1, 0)
 	translate(-250, -50)
 
@@ -77,7 +77,7 @@ function Building00(noise_index, darkness)
     this.show = function()
     {
 
-    if(darkness == 0) //front layer	
+    if(darkness == 0) //front layer
     {
     	this.color = map(noise(noise_index*0.2), 1, 0, 0.2, 0)	//*.2 to reduce frequency, so that color doesn't change too much across the scene
       	fill(this.color)
@@ -89,7 +89,7 @@ function Building00(noise_index, darkness)
     {
     	fill(0.2, 0.1, 0.5)
     	//noStroke()
-    }  
+    }
       rect(this.x, this.y, this.x, this.y + height)
 
       translate(this.offset, 0)
@@ -98,7 +98,7 @@ function Building00(noise_index, darkness)
 
 
 function color_gradient(thickness) //thickness of a subdivision. The thinner, the smoother.
-{                            
+{
     for (i = 0; i < height; i+= thickness)
     {
       this.R = map(i, 0, height, 0.2, 0.55);
@@ -107,7 +107,7 @@ function color_gradient(thickness) //thickness of a subdivision. The thinner, th
 
         fill(this.R, this.G, this.B); //purple
 
-        noStroke()  
+        noStroke()
 
         rect(0, i, width, thickness);
     }
@@ -143,27 +143,27 @@ function building_layer(iStart, windows, darkness)
 	pop()
 
 	if(windows == 1)
-	{	
+	{
 		push()
 		for (var i = 0+iStart; i < num+iStart; i++)
-		{			
+		{
 			windowList[i].show()
 
 	  		additional_translateX(i)
 		}
-		pop() 
+		pop()
 	}
 
-	push()	
-		stroke(0)	
+	push()
+		stroke(0)
 		for (var i = 0+iStart; i < num+iStart; i++)
 		{
 			storeyList[i].show();
 
 			additional_translateX(i)
 		}
-	
-	pop() 
+
+	pop()
 
 }
 
