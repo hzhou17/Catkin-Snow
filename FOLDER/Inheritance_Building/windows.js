@@ -1,41 +1,52 @@
-function Windows00(buildingLen, buildingHeight, building_xoff, noise_index) //the length and height of the build the windows belong to. x and y translation offset.
+class Window_ extends Building
 {
-    this.x = buildingLen/10
-    this.y = this.x * map(noise(noise_index*50), 0, 1, 0.75, 1.4)
+  constructor(noise_index)
+  {
+    super(noise_index)
 
-
-    this.x_range = buildingLen;
-    this.y_range = buildingHeight;
-
-
-    this.x_offset = building_xoff// + (buildingLen/2)/2;
-    this.y_offset = this.y_range * map(noise(noise_index*150), 0, 1, 1.2, 2);
-
-    this.win_col = floor(noise(noise_index*100)*5)+1
+    this.height = 10
+    this.width = 10
 
 
 
-    this.show = function()
+    this.column = 2//Math.floor(Math.random() * 5)
+
+    this.row = 2//Math.floor(Math.random() * 3)
+
+  }
+
+  show()
+  {
+
+    for (var i = 0; i <= this.row; i++)
     {
-        fill(0.7, 0.6, 0.1)
-
-        translate(this.x_offset, 0) //horizontally move onto the building.
-
-
-      // if((floor(random(0, 1)*300) > 0) && (floor(random(0, 1)*300) < 250))
-      // {
-        for (var i = 0; i < this.x_range; i += buildingLen/2)
+        for (var j = 0; j <= this.column; j++)
         {
-            //translate(this.x_offset * (i + 1), 0)
-            for (var j = 0; j < this.y_range; j += buildingHeight/this.win_col)
-            {
-              push()
-                translate(i, j)
-                rect(buildingLen/4 - this.x/2, this.y_offset, this.x, this.y) //creation y value is based on y_offst, the height of the building
-              pop()                                                           //buildingLen/4 - this.x/2: makes the windows to be in the center of the building    
-            }
+            this.total_len = (this.row) * 30 + this.width * (this.row + 1)
+
+
+            push()
+                fill(0.5)
+
+                translate(i * 30, j * 50)
+
+                rect(this.x - (this.x + this.total_len)/2 + this.width, this.y + (height -this.y) * 0.5 , this.width, this.height)
+
+            pop()
+
+
         }
-      }
-    // }
+
+    }
+      print(this.x)
+
+      //rect(this.x, 0, 600, 600)
+
+  }
+
+
+
+
+
 
 }

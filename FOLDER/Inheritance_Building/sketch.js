@@ -1,5 +1,6 @@
 var building = []
 var storey = []
+var window_ = []
 
 var num
 
@@ -33,6 +34,7 @@ function setup()
   {
     building[i] = new Building(i) //(noise_index)
     storey[i] = new Storey(i)
+    window_[i] = new Window_(i)
 
   }
 
@@ -40,7 +42,7 @@ function setup()
   {
     building[i].show()
     storey[i].show()
-
+    window_[i].show()
 
 
     if (i < building.length -1)
