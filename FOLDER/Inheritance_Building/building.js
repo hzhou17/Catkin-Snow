@@ -24,11 +24,18 @@ class Building
 
     show()
     {
-      rect(this.x, this.y, this.x, height)
+      push()
+
+        fill(0.3)
+
+        rect(this.x, this.y, this.x, height)
+
+      pop()
+
 
       translate(this.offset, 0)
 
-      //print(this.y)
+
     }
 
 }

@@ -1,6 +1,7 @@
 var building = []
 var storey = []
 var window_ = []
+var backlayer = []
 
 var num
 
@@ -30,11 +31,12 @@ function setup()
   createCanvas(1280, 720);
   background(0.5)
 
-  for (var i = 0; i < 10; i++)
+  for (var i = 0; i < 8; i++)
   {
     building[i] = new Building(i) //(noise_index)
     storey[i] = new Storey(i)
     window_[i] = new Window_(i)
+    backlayer[i] = new Backlayer(i)
 
   }
 
@@ -43,6 +45,7 @@ function setup()
     building[i].show()
     storey[i].show()
     window_[i].show()
+    backlayer[i].show()
 
 
     if (i < building.length -1)
