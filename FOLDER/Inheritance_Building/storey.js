@@ -7,7 +7,6 @@ class Storey extends Building
     this.height = 25
 
     this.num = Math.floor(Math.random() * 5)
-
   }
 
   show()

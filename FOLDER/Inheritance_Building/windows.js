@@ -38,9 +38,6 @@ class Window_ extends Building
         }
 
     }
-      print(this.x)
-
-      //rect(this.x, 0, 600, 600)
 
   }
 
