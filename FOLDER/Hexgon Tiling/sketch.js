@@ -2,9 +2,6 @@ var bottomHeight //the height from center to bottom, which is shorter than radiu
 var sideLength
 
 
-
-
-
 function setup()
 {
     createCanvas(600, 600);
@@ -12,43 +9,29 @@ function setup()
 
     background(0)
 
-    stroke(0)
+
+	fourHexgons(25, 6)
 
 
-    //translate(width/2, height/2)
-
-
-	fourHexgons(20, 6)
-	//
-
-
-
-
-	// translate(2 * 15 + sideLength, 0)
-	// fourHexgons(15, 6)
-
-	for (var i = 0; i < width/(20*3); i++)
-	{	
+	for (var i = 0; i < width/(25*3)+1; i++)
+	{
 		for (var j = 0; j <= height/(5*bottomHeight)+2; j++)
 		{
 			print(i, j)
 
 			push()
 
-				translate( i*(2 * 20 + sideLength), j * (4*bottomHeight))
-				//translate( 0, i * (4*height))
+				translate( i*(2 * 25 + sideLength), j * (4*bottomHeight))
 
 
-				fourHexgons(20, 6)
+				fourHexgons(25, 6)
 
 			pop()
 		}
 	}
 
-
-
+    saveCanvas('myCanvas', 'png');
 }
-
 
 
 
@@ -74,32 +57,32 @@ function polygon(radius, numberOfSides) //drawing polygon with polar coordinates
 
 function fourHexgons(radius, numberOfSides)
 {
-	polygon(radius, numberOfSides) 
+	polygon(radius, numberOfSides)
 
 
 	push() //top right hexgon
 	    translate(1.5 * sideLength, 1 * bottomHeight)
 
-	    fill(1, 0, 0)
+	    fill(1, 0.68, 0.29)
 
-	    polygon(radius, numberOfSides) 
+	    polygon(radius, numberOfSides)
 	pop()
 
 	push() //bottom left hexgon
 	    translate(0 * sideLength, 2 * bottomHeight)
 
-	    fill(1, 1, 0)
+	    fill(0.27, 0.65, 0.76)
 
-	    polygon(radius, numberOfSides) 
+	    polygon(radius, numberOfSides)
 	pop()
 
 	push() //bottom right hexgon
 	    translate(1.5 * sideLength, 1 * bottomHeight)
 	    translate(0 * sideLength, 2 * bottomHeight)
 
-	    fill(1, 0, 1)
+	    fill(0.01, 0.29, 0.48)
 
-	    polygon(radius, numberOfSides) 
+	    polygon(radius, numberOfSides)
 	pop()
 }
 
