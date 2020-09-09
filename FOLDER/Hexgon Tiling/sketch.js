@@ -23,14 +23,13 @@ function setup()
 
 				translate( i*(2 * 25 + sideLength), j * (4*bottomHeight))
 
-
 				fourHexgons(25, 6)
 
 			pop()
 		}
 	}
 
-    saveCanvas('myCanvas', 'png');
+    //saveCanvas('myCanvas', 'png');
 }
 
 
