@@ -1,94 +1,62 @@
+var size = 15
 
-
-var myRadius =50
-
-var sides = 6
-
+var tileLayer, fishBackground
+var imgClone
 
 function setup()
 {
-    createCanvas(600, 600);
+    createCanvas(600, 800)
     colorMode(RGB, 1)
+    background(0.3, 0.5, 0.8)
 
-    background(.3, .56, .73)
+
+    window.coord = getCoord()
 
 
-	//halfCircle(myRadius)
+    for (var i = 0; i < 1; i++)
+    {
+        SmoothMap();
+    }
 
-	for (var i = 0; i < width/myRadius; i++)
-	{
-		for (var j = 0; j <= height/myRadius; j++)
-		{
-			push()
-				stroke(0)
-				strokeWeight(5)
-				fill(.3, .56, .73)
+//________________________________________________________________________________________________________________
+    tileLayer = createGraphics(600, 800)
+    tileLayer.colorMode(RGB, 1)
 
-				translate( i * 2 * myRadius , j * (myRadius +1.5) )
 
-				if (j % 2 == 1)
-				{
-					translate(myRadius, 0)
-				}
+    for (var i = 0; i < width; i += size) //same for-loop to re-creat the [i, j] coordinates, so that I can access the pre-defined the 0 or 1 values.
+    {
+        for (var j = 0; j <= height; j += size)
+        {
+            if (j % (2 * size) == 0) //offset by a radius every other row
+            {
+                oneScale(size, 2 * i, j, coord[i][j])
+            }
+            else
+            {
+                oneScale(size, 2 * i + size, j, coord[i][j])
+            }
+        }
+    }
+//_____________________________________________________________________________________________________________________________________________
 
-				halfCircle(myRadius)
+    fishBackground = createGraphics(600, 800);
+    KoiShape();
 
-			pop()
-		}
-	}
 
-    saveCanvas('myCanvas', 'png');
+
+    (imgClone = tileLayer.get() ).mask( fishBackground.get());//!!!!!!!!
+
 }
+//_____________________________________________________________________________________________________________________________________________
 
-
-
-function halfCircle(radius) //drawing halfCircle with polar coordinates
+function draw()
 {
-    beginShape()
-
-	    for (var angle = 0; angle < PI; angle += 0.1)
-	    {
-	    	var r = radius
-	    	var x = r * cos(angle)
-	    	var y = r * sin(angle)
-
-	    	vertex(x, y)
-	    }
-
-	endShape()
+    image(imgClone, 0, 0);
 }
 
 
-function fourHexgons(radius, numberOfSides)
-{
-	halfCircle(radius)
 
 
-	push() //top right hexgon
-	    translate(1.5 * sideLength, 1 * bottomHeight)
-
-	    fill(1, 0.68, 0.29)
-
-	    halfCircle(radius)
-	pop()
-
-	push() //bottom left hexgon
-	    translate(0 * sideLength, 2 * bottomHeight)
-
-	    fill(0.27, 0.65, 0.76)
-
-	    halfCircle(radius)
-	pop()
-
-	push() //bottom right hexgon
-	    translate(1.5 * sideLength, 1 * bottomHeight)
-	    translate(0 * sideLength, 2 * bottomHeight)
-
-	    fill(0.01, 0.29, 0.48)
-
-	    halfCircle(radius)
-	pop()
-}
 
 
 
