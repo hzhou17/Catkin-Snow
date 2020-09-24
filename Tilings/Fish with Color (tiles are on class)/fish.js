@@ -3,12 +3,12 @@ class Fish
     constructor(x_off, y_off)
     {
         this.x = x_off
-        this.y = y_off 
+        this.y = y_off
         this.fishLen = 100
         this.fishWid = 100
 
 
-        this.scaleSize = 10
+        this.scaleSize = 20
 
 
 		this.coord = this.GetCoord()
@@ -17,14 +17,14 @@ class Fish
     swim()
     {
         this.x += 1
-        this.y += 1  
+        this.y += 1
     }
 
     oneScale(radius, x_offset, y_offset, color) //drawing halfCircle with polar coordinates
     {
         push()
 
-            translate(x_offset, y_offset) 
+            translate(x_offset, y_offset)
 
             //rotate(-PI/2)
             if (color == 1) fill(1)
@@ -48,7 +48,7 @@ class Fish
                     var y = r * sin(angle)
 
                     vertex(x - r + 0.5 , y - r)
-                }       
+                }
 
                 for (var angle = -PI/2; angle < 0; angle += 0.1) //bottom one forth circle
                 {
@@ -106,13 +106,13 @@ class Fish
             {
                 if (neighborX >= 0 && neighborX < width && neighborY >= 0 && neighborY < height) //the center grid can't be on the edge, because it is the center of a 3*3 grid
                 {
-                    if (neighborX != gridX || neighborY != gridY) //if it is not itself, the center one in 3*3 grid. 
+                    if (neighborX != gridX || neighborY != gridY) //if it is not itself, the center one in 3*3 grid.
                     {
                         wallCount += this.coord[neighborX][neighborY]
                     }
                 }
                 else //if this is around the edge, encourage the growth of walls
-                {                
+                {
                     wallCount++;
                 }
             }
@@ -154,14 +154,14 @@ class Fish
 
         for (var i = 0; i < width; i += this.scaleSize) //same for-loop to re-creat the [i, j] coordinates, so that I can access the pre-defined the 0 or 1 values.
         {
-            for (var j = 0; j < height; j += this.scaleSize)
+            for (var j = 0; j <= height; j += this.scaleSize)
             {
             	//print([i, j])
 
 
             	//if (i >= this.x - this.fishWid && i <= this.x + this.fishWid && j >= this.y - this.fishLen && j <= this.y + this.fishLen)
             	//if (i >= 100 && i <= 200 && j >= 100 && j <= 200)
-            	//if (Math.hypot((i - this.x), (j - this.y)) <=100) 
+            	if (Math.hypot((i - this.x), (j - this.y)) <=100)
             	{
 	                if (j % (2 * this.scaleSize) == 0) //offset by a radius every other row
                 	{
@@ -175,7 +175,7 @@ class Fish
             	// else
             	// {
             	// 	this.oneScale(0, 2 * i, j, this.coord[i][j])
-            	// }	
+            	// }
 
             }
         }

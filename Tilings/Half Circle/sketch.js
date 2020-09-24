@@ -1,6 +1,6 @@
 var size = 15
 
-var tileLayer, fishBackground
+var tileLayer, fishLayer, head
 var imgClone
 
 function setup()
@@ -39,18 +39,22 @@ function setup()
     }
 //_____________________________________________________________________________________________________________________________________________
 
-    fishBackground = createGraphics(600, 800);
+    fishLayer = createGraphics(600, 800);
     KoiShape();
+    HeadShape();
+//_____________________________________________________________________________________________________________________________________________
+    head = createGraphics(600, 800);
 
 
-
-    (imgClone = tileLayer.get() ).mask( fishBackground.get());//!!!!!!!!
+    (imgClone = tileLayer.get() ).mask( fishLayer.get());//!!!!!!!!
 
 }
 //_____________________________________________________________________________________________________________________________________________
 
 function draw()
 {
+
+
     image(imgClone, 0, 0);
 }
 

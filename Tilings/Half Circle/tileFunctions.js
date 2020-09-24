@@ -113,47 +113,73 @@ var tail = [0, -620]
 
 function KoiShape()
 {
-    fishBackground.push();
+    fishLayer.push();
 
-        fishBackground.translate(width/2, height/2 + 125);
-        fishBackground.scale(0.7);
+        fishLayer.translate(width/2, height/2 + 125);
+        fishLayer.scale(0.7);
 
-        fishBackground.beginShape();
+        fishLayer.beginShape();
 
-            fishBackground.curveVertex(0, 250);
-            fishBackground.curveVertex(0, 250);
-                  fishBackground.curveVertex(40, 230);
-                          fishBackground.curveVertex(75, 150);
+            fishLayer.curveVertex(0, 250);
+            fishLayer.curveVertex(0, 250);
+                  fishLayer.curveVertex(40, 230);
+                          fishLayer.curveVertex(77, 150);
 
-                                  fishBackground.curveVertex(112, -90); //right, widest, belly
+                                  fishLayer.curveVertex(114, -90); //right, widest, belly
                              //curveVertex(110, 0);   //head
-                                                      fishBackground.curveVertex(70, -400);
+                                                      fishLayer.curveVertex(70, -400);
 
-                                                              fishBackground.curveVertex(tail[0], tail[1]); //furthest, tail
+                                                              fishLayer.curveVertex(tail[0], tail[1]); //furthest, tail
 
-                                                      fishBackground.curveVertex(-70, -400);
+                                                      fishLayer.curveVertex(-70, -400);
                              //curveVertex(-110, 0);
-                                 fishBackground.curveVertex(-112, -90);  //left, widest, belly
+                                 fishLayer.curveVertex(-114, -90);  //left, widest, belly
 
-                          fishBackground.curveVertex(-75, 150);
-                  fishBackground.curveVertex(-40, 230);
+                          fishLayer.curveVertex(-77, 150);
+                  fishLayer.curveVertex(-40, 230);
 
-            fishBackground.curveVertex(0, 250);
-            fishBackground.curveVertex(0, 250);
+            fishLayer.curveVertex(0, 250);
+            fishLayer.curveVertex(0, 250);
 
-        fishBackground.endShape();
+        fishLayer.endShape();
 
-    fishBackground.pop();
-
-
-
-
-
-
-
-
-
+    fishLayer.pop();
 }
+
+function HeadShape()
+{
+    fishLayer.push();
+
+        fishLayer.translate(width/2, height/2 + 125);
+        fishLayer.scale(0.7);
+
+        fishLayer.stroke(0)
+        fishLayer.strokeWeight(5)
+
+        fishLayer.beginShape();
+
+            fishLayer.curveVertex(0, 250);
+            fishLayer.curveVertex(0, 250);
+                  fishLayer.curveVertex(40, 230);
+                          fishLayer.curveVertex(77, 150);
+
+
+
+                          fishLayer.curveVertex(-77, 150);
+                  fishLayer.curveVertex(-40, 230);
+
+            fishLayer.curveVertex(0, 250);
+            fishLayer.curveVertex(0, 250);
+
+        fishLayer.endShape();
+
+    fishLayer.pop();
+}
+
+
+
+
+
 
 
 
