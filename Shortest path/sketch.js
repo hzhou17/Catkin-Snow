@@ -4,6 +4,8 @@ var locX, locY
 
 var radius = 20
 
+var coord = []
+
 
 function setup()
 {
@@ -33,7 +35,9 @@ function draw()
     for (var i = 0; i < circleArray.length; i++)
     {
         circleArray[i].show()
+
     }
+
 
     var reached = []
     var unreached = []
@@ -73,6 +77,7 @@ function draw()
         }
 
         strokeWeight(2)
+
         line(reached[reachedIndex].x, reached[reachedIndex].y,
             unreached[unreachedIndex].x, unreached[unreachedIndex].y)
 
@@ -98,11 +103,45 @@ class Circle
     {
         ellipse(this.x, this.y, radius, radius)
     }
+
+
+
 }
 
 function mousePressed()
 {
     var circle = new Circle(mouseX, mouseY)
 
-    circleArray.push(circle)
+    circleArray.push(circle)  
+
+    print(circleArray.length)
+
+    print(coord)
+}
+
+
+function mouseDragged()
+{
+    {
+        for (var i = 0; i < circleArray.length; i++)
+        {
+             if (Math.hypot(mouseX - circleArray[i].x, mouseY - circleArray[i].y ) < radius) //the mouse has to stay inside the region during drag. can't drag too fast. 2 * radius to make the region larger 
+             {
+                circleArray[i].x = mouseX
+                circleArray[i].y = mouseY
+             }   
+        }
+    }  
+}
+
+
+
+
+
+
+function AddCircle()
+{
+    var circle = new Circle(mouseX, mouseY)
+
+    circleArray.push(circle)   
 }
