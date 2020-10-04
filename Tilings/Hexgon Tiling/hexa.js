@@ -3,6 +3,8 @@ var sideLength
 
 var polygonRadius = 30
 
+var yellow, white, lightBlue, darkBlue
+
 
 function setup()
 {
