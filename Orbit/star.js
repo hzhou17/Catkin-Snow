@@ -6,12 +6,12 @@ class Star
 
 		this.size = 0 // give it a value, so it's not null
 
-		this.radius = random(35, 300)
+		this.radius = random(35, window.innerHeight - 50)
 
 		this.alpha = 1
 
 		this.angle = random(0, 360)
-		this.speed = random(0.005, 0.02)
+		this.speed = random(0.001, 0.02)
 
 		this.trail = []
 
@@ -19,7 +19,7 @@ class Star
 
 		this.color = random()
 
-		this.max = this.radius/8
+		this.max = this.radius/18
 		//Math.floor(Math.random() * 30)
 	}
 
@@ -30,6 +30,15 @@ class Star
 
 
 		//print(this.size)
+
+	    if (mappedVol > 1)
+	    {
+			this.speed *= mappedVol;
+	    }
+
+
+
+
 
 
 		this.trail.push([this.x, this.y])

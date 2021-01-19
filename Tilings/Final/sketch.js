@@ -166,7 +166,7 @@ function draw()
 
     ellipse(random(width), random(height), rippleRadius, rippleRadius)
 
-    print(currentAlpha)
+    //print(currentAlpha)
 
     if (rippleRadius > maxSize || rippleRadius < 0)
     {

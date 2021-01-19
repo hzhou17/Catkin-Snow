@@ -1,37 +1,56 @@
 
 let stars = []
 
+let mic;
+
+let mappedVol
+
 function setup()
 {
-    createCanvas(600, 600);
+    createCanvas(window.innerWidth, window.innerHeight);
     colorMode(RGB, 1);
 
     background(0)
 
+    userStartAudio();
 
-  for (let i = 0; i < 200; i++) 
+    mic = new p5.AudioIn();
+    mic.start();
+
+
+
+
+  for (let i = 0; i < 150; i++) 
   {
     stars.push(new Star())
   }
 
+  //print(window.innerWidth);
 
 }
 
 
 function draw()
 {
-    background(0)
+    let vol = mic.getLevel();
+    //print(vol);
 
-    noStroke()
- 
-    if (frameCount % 60 == 0) print(frameRate())
-
+	mappedVol = map(vol, 0, 0.4, 0.5, 5)
 
 
-    for (let i = 0; i < stars.length; i++) 
-    {
-    //stars[i].show();
-    stars[i].update();
-    }
+
+	background(0)
+
+	noStroke()
+
+	//if (frameCount % 60 == 0) print(frameRate())
+
+
+
+	for (let i = 0; i < stars.length; i++) 
+	{
+	    //stars[i].show();
+	    stars[i].update();
+	}
 
 }
