@@ -5,6 +5,8 @@ let mic;
 
 let mappedVol
 
+let playing
+
 function setup()
 {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -35,7 +37,7 @@ function draw()
     let vol = mic.getLevel();
     //print(vol);
 
-	mappedVol = map(vol, 0, 0.4, 0.5, 5)
+	mappedVol = map(vol, 0, 1, 1, 100)
 
 
 
@@ -43,7 +45,7 @@ function draw()
 
 	noStroke()
 
-	//if (frameCount % 60 == 0) print(frameRate())
+	//if (frameCount % 60 == 0) print (mappedVol) //print(frameRate())
 
 
 

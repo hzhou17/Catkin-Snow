@@ -6,12 +6,12 @@ class Star
 
 		this.size = 0 // give it a value, so it's not null
 
-		this.radius = random(35, window.innerHeight - 50)
+		this.radius = random(35, window.innerHeight * 0.85)
 
 		this.alpha = 1
 
 		this.angle = random(0, 360)
-		this.speed = random(0.001, 0.02)
+		this.initSpeed = random(0.001, 0.01)
 
 		this.trail = []
 
@@ -29,14 +29,42 @@ class Star
 		this.y = height/2 + this.radius * Math.sin(this.angle)
 
 
+
+		this.currentSpeed = this.initSpeed * mappedVol
+		//this.currentMax = this.max * mappedVol
+
+
 		//print(this.size)
 
-	    if (mappedVol > 1)
-	    {
-			this.speed *= mappedVol;
-	    }
+	  //   if (mappedVol > 1)
+	  //   {
+	  //   	playing = true
+
+			// this.maxSpeed = this.initSpeed * mappedVol
+	  //   }
+	  //   else
+	  //   {
+	  //   	this.currentSpeed = this.initSpeed
+	  //   }
+
+	  //   //print(this.maxSpeed)
+	  //   print(mappedVol)
+
+	  //   if (playing)
+	  //   {
+	  //   	var timer = 0
+	  //   	timer += 1/60 * 0.3
+	  //   	this.currentSpeed = lerp(this.initSpeed, this.maxSpeed, timer)
 
 
+	  //   }
+
+	  //   if (timer > 1)
+	  //   {
+	  //   	playing = false;
+	  //   	this.currentSpeed = this.initSpeed
+	  //   	timer = 0
+	  //   }
 
 
 
@@ -70,7 +98,7 @@ class Star
 
 	    }
 
-	    this.angle += this.speed;
+	    this.angle += this.currentSpeed;
 	}
 	
 
