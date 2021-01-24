@@ -17,17 +17,27 @@ function setup()
 
     print(cos(PI/6))
 
-    // for (let i = 0; i < width; i += hori_dis) 
-    // {
-    //     //for (let j = 0; j < 2; j++) 
-    //     {
-    //         //print(i)
-    //         tops.push(new Top(i, j * 50));
+    for (let i = 0; i < width; i += 150) 
+    {
+        //for (let j = 0; j < height; j+= 150) 
+        {
+            //print(i)
+            tops.push(new Top(0, 0));
 
-    //     }
+        }
 
 
-    // }
+    }
+
+
+    for (let i = 0; i < tops.length; i++) 
+    {
+    //stars[i].show();
+        tops[i].show();
+    }
+
+
+    
 
 }
 
@@ -40,28 +50,25 @@ function draw()
  
     //if (frameCount % 60 == 0) print(frameRate())
     translate(100, 100)
-    beginShape()
 
-        for (var angle = PI/4; angle < TWO_PI + PI/4; angle += TWO_PI/4)
-        {
-            var r = spade_len
-            var x = r * cos(angle)
-            var y = r * sin(angle)
+    // beginShape()
 
-            vertex(x, y)
-        }
+    //     for (var angle = PI/4; angle < TWO_PI + PI/4; angle += TWO_PI/4)
+    //     {
+    //         var r = spade_len
+    //         var x = r * cos(angle)
+    //         var y = r * sin(angle)
 
-    endShape()
+    //         vertex(x, y)
+    //     }
 
-
-
+    // endShape()
 
 
 
-    // for (let i = 0; i < tops.length; i++) 
-    // {
-    // //stars[i].show();
-    //     tops[i].show();
-    // }
+
+
+
+
 
 }
