@@ -2,16 +2,17 @@ class Star
 {
 	constructor()
 	{
-		this.initSize = random(2, 6)
+		this.initSize = random(2, 8)
 
 		this.size = 0 // give it a value, so it's not null
 
-		this.radius = random(35, window.innerHeight * 0.85)
+		this.radius = random(50, max_radius)
 
 		this.alpha = 1
+		this.current_alpha = 1
 
-		this.angle = random(0, 360)
-		this.initSpeed = random(0.001, 0.01)
+		this.angle = random(0, 2*PI)
+		this.initSpeed = random(0.001, 0.018)
 
 		this.trail = []
 
@@ -19,52 +20,63 @@ class Star
 
 		this.color = random()
 
-		this.max = this.radius/18
+		this.max = this.radius/20
 		//Math.floor(Math.random() * 30)
+
+		
+		this.life = 0; 
 	}
 
 	update()
 	{
+		//this.currentSpeed = this.initSpeed * mappedVol
+
+		//print(this.max_r)
+
+		this.max_r = max_radius*map(this.radius, 50, max_radius, 0.7, 1)
+
+
+		this.currentSpeed = this.initSpeed
+
+		if (this.radius < this.max_r)
+		{
+			this.radius += 1;
+		}
+
+
+		this.life += 1/60
+
+		if (this.life > 2)
+		{
+			this.current_alpha -= 1/((max_life-2)*60)
+		}
+
+		//print(this.life)
+
+		//print(this.alpha)
+
+
+
+
+		// if (!playing)
+		// {
+		// 	if (this.angle < all_angle || 
+		// 	this.angle>all_angle && this.angle<all_angle+2*PI)
+		// 	{
+		// 		this.angle += this.currentSpeed;
+		// 	}
+		// }
+
+		// else
+		{
+			this.angle += this.currentSpeed;
+		}
+
+
+
 		this.x = width/2 + this.radius * Math.cos(this.angle)
 		this.y = height/2 + this.radius * Math.sin(this.angle)
 
-
-
-		this.currentSpeed = this.initSpeed * mappedVol
-		//this.currentMax = this.max * mappedVol
-
-
-		//print(this.size)
-
-	  //   if (mappedVol > 1)
-	  //   {
-	  //   	playing = true
-
-			// this.maxSpeed = this.initSpeed * mappedVol
-	  //   }
-	  //   else
-	  //   {
-	  //   	this.currentSpeed = this.initSpeed
-	  //   }
-
-	  //   //print(this.maxSpeed)
-	  //   print(mappedVol)
-
-	  //   if (playing)
-	  //   {
-	  //   	var timer = 0
-	  //   	timer += 1/60 * 0.3
-	  //   	this.currentSpeed = lerp(this.initSpeed, this.maxSpeed, timer)
-
-
-	  //   }
-
-	  //   if (timer > 1)
-	  //   {
-	  //   	playing = false;
-	  //   	this.currentSpeed = this.initSpeed
-	  //   	timer = 0
-	  //   }
 
 
 
@@ -85,20 +97,16 @@ class Star
 	        if(this.trail.length > this.max)
 	        {
 	          this.trail.splice(0, 1);
-	          this.alpha = 1;
+	          this.alpha = this.current_alpha;
 	          this.size = this.initSize;
 	        }
 	    
 	        this.alpha -= 0.05;
 
-
-
-
 	        this.size -= 0.005;
-
 	    }
 
-	    this.angle += this.currentSpeed;
+	    
 	}
 	
 
