@@ -1,9 +1,10 @@
 
 let stars = []
 
-let mic;
+// let mic;
 
-let mappedVol
+// let mappedVol
+
 
 let playing
 
@@ -11,28 +12,31 @@ let all_angle
 
 let play = false;
 
-let max_radius
+let max_radius, min_radius = 50
 
-let max_life = 8
+let max_life = 5.75
 
 let increase=false, decrease=false
 
+
+let run_time = 0
+
 function setup()
 {
-    //createCanvas(window.innerWidth, window.innerHeight);
-    createCanvas(600, 600);
+    createCanvas(window.innerWidth, window.innerHeight);
+    //createCanvas(600, 600);
 
     colorMode(RGB, 1);
 
     background(0)
 
-    userStartAudio();
+    // userStartAudio();
 
-    mic = new p5.AudioIn();
-    mic.start();
+    // mic = new p5.AudioIn();
+    // mic.start();
 
     all_angle = PI/4
-    max_radius = 300
+    max_radius = height*0.5*0.95
 
 
   for (let i = 0; i < 1; i++) 
@@ -40,28 +44,56 @@ function setup()
     stars.push(new Star())
   }
 
-  //print(window.innerWidth);
-
-  print(random(50, 50))
 
 }
 
 
 function draw()
 {
+
+  run_time = floor(millis()/1000 + 1)
+
   if (frameCount % 60 == 0)
   {
-    print(frameRate())
+    //print(frameRate())
 
     //print(max_radius)
 
-    print(stars.length);
+    //print(stars.length);
 
     //stars.push(new Star())
+
+    print(run_time)
   }
 
 
-  if (increase && max_radius < 300) max_radius += 2
+
+
+  if (run_time % 8 == 0)
+  {
+  	//print("gehuisghosghowe")
+
+    decrease = true
+    increase = false
+  }
+
+  if (run_time % 15 == 0)
+  {
+  	//print("gehuisghosghowe")
+
+    decrease = false
+    increase = true
+  }
+
+
+
+
+
+
+
+
+
+  if (increase && max_radius < height*0.5*0.95) max_radius += 1.5
   if (decrease && max_radius > 53) max_radius -= 0.75
 
 
@@ -73,10 +105,13 @@ function draw()
 
 
 
-  if (frameCount % 2 == 0)
-  {
-    stars.push(new Star())
-  }
+	if (max_radius < 53)
+	{
+		if (frameCount % 3 == 0) stars.push(new Star())
+	}
+	else stars.push(new Star())
+
+
 
 
 	background(0)
@@ -90,10 +125,16 @@ function draw()
 	{
 	    stars[i].update();
 
-      if (stars[i].radius >= stars[i].max_r && stars[i].life > max_life)
+      //if (stars[i].radius >= stars[i].max_r && stars[i].life > max_life)
+		if (stars[i].life > max_life)
       {
         stars.splice(i, 1)
       }
+
+      //if (i == 0 && frameCount % 40 == 0)  print(stars[0].alpha)
+
+
+
 	}
 
 }
