@@ -1,15 +1,19 @@
 const flock = []
 
+let alignSlider, cohesionSlider, separationSlider
 
-
-
+let leader, obstacle
 
 function setup()
 {
-
     createCanvas(600, 600)
 
     colorMode(RGB, 1)
+
+
+    alignSlider = createSlider(0, 5, 1, 0.1)
+    cohesionSlider = createSlider(0, 5, 1, 0.1)
+    separationSlider = createSlider(0, 5, 1, 0.1)
 
 
     for(let i=0; i<100; i++)    
@@ -17,10 +21,16 @@ function setup()
         flock.push(new Boid())
     }
 
+    leader = new Leader()
+
+
+    obstacle = new Obstacle()
 
 
 
 
+    flock.push(leader)
+    flock.push(obstacle)
 }
 
 
@@ -31,10 +41,15 @@ function draw()
 
     for (let boid of flock)
     {
-        boid.edges()
-        boid.flock(flock)
-        boid.update()
-        boid.show()
+        //if (boid != leader)
+        {
+            boid.edges()
+            boid.flock(flock)
+            boid.update()
+
+        }
+            boid.show()
+
     }
 
 
