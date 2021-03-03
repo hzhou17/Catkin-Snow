@@ -57,24 +57,42 @@ class Boid
     follow(boids)
     {
         let steering = createVector()
-        let total = 0
 
-        for (let other of boids)
-        {
-            if (other instanceof Leader)
-            {
-                steering.add(other.vel)
-                total++
 
-            }
-        }
+        let end = createVector(mouseX, mouseY)
+        let begin = createVector(this.position.x, this.position.y)
 
-        steering.div(total)
-        steering.setMag(this.maxSpeed)
-        steering.sub(this.vel)
-        steering.limit(this.maxForce)
+        let diff = end - begin
+
+        steering.add(diff)
 
         return steering
+
+
+
+
+
+
+
+        // let steering = createVector()
+        // let total = 0
+
+        // for (let other of boids)
+        // {
+        //     if (other instanceof Leader)
+        //     {
+        //         steering.add(other.vel)
+        //         total++
+
+        //     }
+        // }
+
+        // steering.div(total)
+        // steering.setMag(this.maxSpeed)
+        // steering.sub(this.vel)
+        // steering.limit(this.maxForce)
+
+        // return steering
     }
 
 
