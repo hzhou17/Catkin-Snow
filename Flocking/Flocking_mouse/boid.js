@@ -8,7 +8,7 @@ class Boid
         this.vel.setMag(random(1, 2))
         this.accel = createVector()
         this.maxForce = 0.2
-        this.maxSpeed = 4
+        this.maxSpeed = 3
 
         this.color = random()
     }
@@ -62,45 +62,18 @@ class Boid
         let end = createVector(mouseX, mouseY)
         let begin = createVector(this.position.x, this.position.y)
 
-        let diff = end - begin
+        let diff = end.sub(begin)
+
+        diff.setMag(0.2)
 
         steering.add(diff)
 
+
+        steering.limit(3)
+
         return steering
 
-
-
-
-
-
-
-        // let steering = createVector()
-        // let total = 0
-
-        // for (let other of boids)
-        // {
-        //     if (other instanceof Leader)
-        //     {
-        //         steering.add(other.vel)
-        //         total++
-
-        //     }
-        // }
-
-        // steering.div(total)
-        // steering.setMag(this.maxSpeed)
-        // steering.sub(this.vel)
-        // steering.limit(this.maxForce)
-
-        // return steering
     }
-
-
-
-
-
-
-
 
 
 
@@ -134,7 +107,7 @@ class Boid
         {
             steering.div(total)
             steering.sub(this.position)
-            .setMag(this.maxSpeed)
+            steering.setMag(this.maxSpeed)
             steering.sub(this.vel)
             steering.limit(this.maxForce)
         }
