@@ -86,7 +86,7 @@
 //   pop();
 // }
 
-
+//----------------------Linear Lerp
 
 let beginX = 20.0; // Initial x-coordinate
 let beginY = 10.0; // Initial y-coordinate
@@ -152,9 +152,64 @@ function mousePressed() {
 
 
 
+//-----------location, velocity, acceleration
 
 
 
+let mover
+
+
+function setup()
+{
+    createCanvas(600, 600)
+
+
+    mover = new Mover()
+
+
+
+}
+
+
+function draw()
+{
+    mover.move()
+}
+
+class Mover
+{
+    constructor()
+    {
+        this.location = createVector(300, 300)
+        this.velocity = createVector()
+        this.acceleration = createVector()
+    }
+
+
+    move()
+    {
+        let mouse = createVector(mouseX, mouseY)
+        mouse.sub(this.location)
+        mouse.setMag(0.5)
+
+
+        this.acceleration = mouse 
+
+
+
+
+
+
+
+        this.velocity = this.velocity.add(this.acceleration)
+        this.location = this.location.add(this.velocity)
+
+        this.velocity.limit(5)
+
+
+        ellipse(this.location.x, this.location.y, 10, 10)
+    }
+}
 
 
 

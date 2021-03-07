@@ -6,7 +6,7 @@ let leader, obstacle
 
 function setup()
 {
-    createCanvas(600, 600)
+    createCanvas(1280, 720)
 
     colorMode(RGB, 1)
 
@@ -14,7 +14,7 @@ function setup()
     alignSlider = createSlider(0, 5, 1, 0.1)
     cohesionSlider = createSlider(0, 5, 1, 0.1)
     separationSlider = createSlider(0, 5, 1, 0.1)
-    followSlider = createSlider(0, 10, 5, 1)
+    followSlider = createSlider(0, 10, 0, 1)
 
     for(let i=0; i<100; i++)    
     {
@@ -22,14 +22,10 @@ function setup()
     }
 
     leader = new Leader()
-
+    flock.push(leader)
 
     //obstacle = new Obstacle()
 
-
-
-
-    flock.push(leader)
     //flock.push(obstacle)
 }
 
