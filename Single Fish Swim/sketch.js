@@ -202,7 +202,21 @@ function keyPressed()
   if (keyCode === UP_ARROW) 
   {
     gather = !gather
+    attract = false
   } 
+
+
+  if (keyCode === DOWN_ARROW)
+  {
+    attract = !attract
+    gather = false
+  }
+
+  if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW)
+  {
+    attract = false
+    gather = false
+  }
 }
 
 

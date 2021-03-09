@@ -217,7 +217,6 @@ function keyPressed()
     attract = false
     gather = false
   }
-
 }
 
 
