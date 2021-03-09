@@ -138,7 +138,7 @@ function mountain_range(scaleX, tx, ty, background_color, draw_tree, layer_scale
 // ###################################################################################################
 function setup()
 {
-    img = createCanvas(3840, 2160);
+    img = createCanvas(window.innerWidth, window.innerHeight);
      // = height/2
 
     colorMode(RGB, 1);
@@ -160,15 +160,16 @@ function setup()
     fill(0.2, 0.5, 0.2)
     // mountain_range(100, 500, 300, 0.8, 0)
 
+    scale(0.3, 0.3)
+    translate(0, 2000)
     mountain_range(120, 250, 180, yellow5, 0)
 
-    mountain_range(80, 550, 320, yellow4, 1, 0.6)
 
     mountain_range(100, 350, 400, yellow3, 1, 0.7) //scaleX, tx, ty, color, alpha, draw_tree
 
     mountain_range(60, 350, 650, yellow2, 1 , 0.8)
 
-    mountain_range(100, 1200, 900, yellow1, 1, 1)
+    mountain_range(100, 1200, 1000, yellow1, 1, 1)
 
     //save(img)
 // PCDCloud()
