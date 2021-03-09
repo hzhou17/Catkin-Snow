@@ -106,7 +106,7 @@ pop()
 
   push()
     fill(0.72)
-    ellipse(width/3.5, height*0.725, 130, 30)
+    ellipse(width/3.3, height*0.725, 130, 30)
     //ellipse(width/3, height*0.5, 20, 20)
   pop()
 
@@ -202,7 +202,22 @@ function keyPressed()
   if (keyCode === UP_ARROW) 
   {
     gather = !gather
+    attract = false
   } 
+
+
+  if (keyCode === DOWN_ARROW)
+  {
+    attract = !attract
+    gather = false
+  }
+
+  if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW)
+  {
+    attract = false
+    gather = false
+  }
+
 }
 
 

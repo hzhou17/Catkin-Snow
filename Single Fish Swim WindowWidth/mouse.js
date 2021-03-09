@@ -153,11 +153,11 @@ class Mouse
 
     show()
     {
-        push()
-            strokeWeight(25)
-            stroke(1)
-            point(this.position.x, this.position.y)
-        pop()
+        // push()
+        //     strokeWeight(25)
+        //     stroke(1)
+        //     point(this.position.x, this.position.y)
+        // pop()
     }
 
     edges()
