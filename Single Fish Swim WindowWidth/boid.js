@@ -31,7 +31,7 @@ class Boid
         // this.current_rotate = 0
         // this.rotate_pct = 0
 
-        this.adjustment_interval = floor(random(300, 400))
+        this.adjustment_interval = floor(random(350, 500))
     }
 
 
