@@ -95,9 +95,9 @@ function draw()
 push()
 fill(0)
 
-text("playing: " + playing.toString(), 10, 10)
+text("getting volume: " + playing.toString(), 10, 10)
 
-text("flip: "+ flip.toString(), 10, 30)
+text("can flip: "+ flip.toString(), 10, 30)
 
 text("increase: "+ increase.toString(), 10, 50)
 pop()
@@ -120,7 +120,7 @@ pop()
     vol *= 100
 
 
-    if (vol > 0.4)
+    if (vol > 0.6)
     {
         playing = true
 
@@ -153,7 +153,7 @@ pop()
     //   decrease = true
     // }
 
-    if (idle_timer > 2) flip = true
+    if (idle_timer > 1) flip = true
 
 
 
@@ -176,6 +176,11 @@ pop()
 
       increase = !increase
       decrease = !decrease
+
+      let random_value = random()
+
+      if (random_value > 0.5) inward = false
+      else inward = true
 
       flip  = false
 

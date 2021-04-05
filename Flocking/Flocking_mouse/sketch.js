@@ -4,6 +4,8 @@ let alignSlider, cohesionSlider, separationSlider, followSlider
 
 let leader, obstacle
 
+let attract = false
+
 function setup()
 {
     createCanvas(1280, 720)
@@ -13,7 +15,7 @@ function setup()
 
     alignSlider = createSlider(0, 5, 1, 0.1)
     cohesionSlider = createSlider(0, 5, 1, 0.1)
-    separationSlider = createSlider(0, 5, 2, 0.1)
+    separationSlider = createSlider(0, 5, 1, 0.1)
     followSlider = createSlider(0, 10, 5, 1)
 
     for(let i=0; i<100; i++)    
@@ -53,4 +55,27 @@ function draw()
     }
 
 
+}
+
+
+function keyPressed() 
+{
+  if (keyCode === UP_ARROW) 
+  {
+    //gather = !gather
+    attract = !attract
+  } 
+
+
+  // if (keyCode === DOWN_ARROW)
+  // {
+  //   attract = !attract
+  //   gather = false
+  // }
+
+  // if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW)
+  // {
+  //   attract = false
+  //   gather = false
+  // }
 }

@@ -56,23 +56,25 @@ class Boid
 
     follow(boids)
     {
-        let steering = createVector()
+        if (attract)
+        {
+            let steering = createVector()
 
 
-        let end = createVector(mouseX, mouseY)
-        let begin = createVector(this.position.x, this.position.y)
+            let end = createVector(mouseX, mouseY)
+            let begin = createVector(this.position.x, this.position.y)
 
-        let diff = end.sub(begin)
+            let diff = end.sub(begin)
 
-        diff.setMag(0.2)
+            diff.setMag(0.2)
 
-        steering.add(diff)
+            steering.add(diff)
 
 
-        steering.limit(3)
+            steering.limit(3)
 
-        return steering
-
+            return steering
+        }
     }
 
 
@@ -190,15 +192,21 @@ class Boid
 
     show()
     {
+        push()
         //strokeWeight(5)
-        noStroke()
-        if (this.color > 0.5) fill(1, 0, 0)
-        else fill(0, 0, 1)
+            noStroke()
+                        translate(this.position.x, this.position.y)
+            if (this.color > 0.5) fill(1, 0, 0)
+            else fill(0, 0, 1)
 
 
+            let theta = this.vel.heading() + radians(90)   
+            rotate(theta)
 
-        //stroke(1)
-        ellipse(this.position.x, this.position.y, 5, 5)
+
+            triangle(35, 30, 40, 0, 45, 30);
+
+        pop()
     }
 
     edges()

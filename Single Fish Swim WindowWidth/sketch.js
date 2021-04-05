@@ -105,8 +105,8 @@ pop()
   seaFloor2()
 
   push()
-    fill(0.72)
-    ellipse(width/3.3, height*0.725, 130, 30)
+    fill(0.7)
+    ellipse(width/3.3, height*0.72, 130, 30)
     //ellipse(width/3, height*0.5, 20, 20)
   pop()
 
