@@ -95,11 +95,15 @@ function draw()
 push()
 fill(0)
 
-text("playing: " + playing.toString(), 10, 10)
+//text("playing: " + playing.toString(), 10, 10)
 
-text("flip: "+ flip.toString(), 10, 30)
+//text("flip: "+ flip.toString(), 10, 30)
 
-text("increase: "+ increase.toString(), 10, 50)
+text("Inhaling: "+ increase.toString(), 15, 50)
+text("Exhaling: "+ (!increase).toString(), 15, 80)
+// if (increase && playing) text("Inhaling", 10, 10)
+// if (decrease && playing) text("Exhaling", 10, 50)
+
 pop()
 
 
@@ -120,7 +124,7 @@ pop()
     vol *= 100
 
 
-    if (vol > 0.4)
+    if (vol > 0.13)
     {
         playing = true
 
@@ -176,6 +180,11 @@ pop()
 
       increase = !increase
       decrease = !decrease
+
+    	let random_value = random()
+
+      if (random_value > 0.5) inward = false
+      else inward = true
 
       flip  = false
 
