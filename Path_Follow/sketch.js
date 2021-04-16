@@ -11,19 +11,21 @@
 let vehicle;
 let path;
 
-function setup() {
-  createCanvas(600, 200);
-  let startX = width / 3;
-  let startY = random(height / 3, height * 2 / 3)
+function setup() 
+{
+    createCanvas(600, 200);
+    let startX = width / 3;
+    let startY = random(height / 3, height * 2 / 3)
 
-  vehicle = new Vehicle(startX, startY);
+    vehicle = new Vehicle(startX, startY);
 
-  path = new Path();
-  path.addPoint(0, 50);
-  path.addPoint(100, 100);
-  path.addPoint(300, 50);
-  path.addPoint(500, 100);
-  path.addPoint(600, 50);
+    path = new Path();
+
+
+    for (let i=0; i<=2*PI+0.1; i+=0.1)
+    {
+        path.addPoint(50*sin(i)+300, 50*cos(i)+100)
+    }
 }
 
 function draw() {
@@ -36,11 +38,13 @@ function draw() {
   vehicle.display();
 }
 
-function mousePressed() {
+function mousePressed() 
+{
   vehicle = new Vehicle(mouseX, mouseY);
 }
 
-function keyPressed() {
+function keyPressed() 
+{
   if (keyCode === 32) { //Space key 
     path = new Path();
     path.addPoint(0, random(height));

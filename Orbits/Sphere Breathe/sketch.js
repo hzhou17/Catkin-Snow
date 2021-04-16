@@ -95,20 +95,19 @@ function draw()
 push()
 fill(0)
 
-<<<<<<< HEAD
 //text("playing: " + playing.toString(), 10, 10)
 
 //text("flip: "+ flip.toString(), 10, 30)
-
-text("Inhaling: "+ increase.toString(), 15, 50)
-text("Exhaling: "+ (!increase).toString(), 15, 80)
+textSize(20);
+text("Inhaling: "+ increase.toString(), 200, 80)
+text("Exhaling: "+ (!increase).toString(), 200, 120)
 // if (increase && playing) text("Inhaling", 10, 10)
 // if (decrease && playing) text("Exhaling", 10, 50)
-=======
-text("getting volume: " + playing.toString(), 10, 10)
 
-text("can flip: "+ flip.toString(), 10, 30)
->>>>>>> e00b0d05f7d95898cadd29f23d88e4c865b812fa
+//text("getting volume: " + playing.toString(), 10, 10)
+
+//text("can flip: "+ flip.toString(), 100, 30)
+
 
 pop()
 
@@ -130,11 +129,9 @@ pop()
     vol *= 100
 
 
-<<<<<<< HEAD
-    if (vol > 0.13)
-=======
+
     if (vol > 0.6)
->>>>>>> e00b0d05f7d95898cadd29f23d88e4c865b812fa
+
     {
         playing = true
 
@@ -191,11 +188,9 @@ pop()
       increase = !increase
       decrease = !decrease
 
-<<<<<<< HEAD
-    	let random_value = random()
-=======
+
       let random_value = random()
->>>>>>> e00b0d05f7d95898cadd29f23d88e4c865b812fa
+
 
       if (random_value > 0.5) inward = false
       else inward = true

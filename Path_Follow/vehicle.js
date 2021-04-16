@@ -12,7 +12,8 @@ class Vehicle {
 
 
   /////////////////////////////
-  follow(p) {
+  follow(p) 
+  {
 
     // Predict the vehicle future location
     let predict = this.velocity.copy();
@@ -40,7 +41,8 @@ class Vehicle {
       let distance = p5.Vector.dist(predictLoc, normalPoint);
 
       // Check if this normalPoint is nearest to the predictLoc
-      if (distance < worldRecord) {
+      if (distance < worldRecord) 
+      {
         worldRecord = distance;
         // Move a little further along the path and set a target
         // let dir = p5.Vector.sub(a, b);

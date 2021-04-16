@@ -18,7 +18,7 @@ class Star {
 
     this.color = random()
 
-    this.max = this.radius / 25
+    this.max = this.radius / 20
 
     this.life = 0;
   }
